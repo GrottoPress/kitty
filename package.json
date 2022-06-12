@@ -1,0 +1,42 @@
+{
+  "name": "kitty",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "prepare": "svelte-kit sync",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest tests/unit",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:e2e": "playwright test tests/e2e",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.22.2",
+    "@sveltejs/adapter-node": "^1.0.0-next.78",
+    "@sveltejs/kit": "next",
+    "@types/cookie": "^0.5.1",
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.15.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "isomorphic-fetch": "^3.0.0",
+    "svelte": "^3.46.4",
+    "svelte-check": "^2.4.2",
+    "svelte-preprocess": "^4.10.2",
+    "svelte2tsx": "^0.5.10",
+    "ts-jest": "^28.0.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "cookie": "^0.5.0",
+    "dotenv": "^16.0.1"
+  }
+}
