@@ -173,16 +173,17 @@ The following components are available:
   <script lang="ts">
     import Button from '@grottopress/kitty/components/ToggleButton.svelte'
 
+    let menu: HTMLElement | undefined
     let showMenu = false
   </script>
 
   <div>
-    <Button bind:open={showMenu} clickOutside>
+    <Button bind:open={showMenu} target={menu} clickOutside>
       &equiv; Menu
     </Button>
 
     {#if showMenu}
-      <nav>
+      <nav bind:this={menu}>
         <a sveltekit:prefetch href="/link/a">Link A</a>
         <a sveltekit:prefetch href="/link/b">Link B</a>
         <a sveltekit:prefetch href="/link/c">Link C</a>
@@ -191,7 +192,7 @@ The following components are available:
   </div>
   ```
 
-  The `clickOutside` prop, if `true`, enables closing a menu by clicking anywhere outside the button.
+  The `clickOutside` prop, if `true`, enables closing a menu by clicking anywhere outside the button and its target.
 
 ### Actions
 

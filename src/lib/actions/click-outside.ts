@@ -1,8 +1,8 @@
-export default (node: HTMLElement, handler: () => void) => {
+export default (node: HTMLElement, handler: (event: Event) => void) => {
   const onClick = (event: Event) => {
     !node.contains(event.target as HTMLElement) &&
     !event.defaultPrevented &&
-    handler()
+    handler(event)
   }
 
   document.addEventListener('click', onClick, true)

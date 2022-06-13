@@ -3,13 +3,15 @@
 
   export let clickOutside = false
   export let open: boolean
+  export let target: HTMLElement | undefined = undefined
 
   const toggle = () => {
     open = !open
   }
 
-  const close = () => {
+  const close = (event: Event) => {
     if (!clickOutside) return
+    if (target === event.target) return
 
     open = false
   }
