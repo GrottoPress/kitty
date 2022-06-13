@@ -1,6 +1,14 @@
 {
-  "name": "kitty",
+  "name": "@grottopress/kitty",
+  "type": "module",
   "version": "0.1.0",
+  "description": "Kitty is a collection of utilities for SvelteKit",
+  "license": "MIT",
+  "author": {
+    "name": "GrottoPress",
+    "email": "info@grottopress.com",
+    "url": "https://www.grottopress.com"
+  },
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -34,9 +42,19 @@
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
   },
-  "type": "module",
   "dependencies": {
     "cookie": "^0.5.0",
     "dotenv": "^16.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GrottoPress/kitty.git"
+  },
+  "homepage": "https://github.com/GrottoPress/kitty#README",
+  "keywords": [
+    "sveltekit"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
