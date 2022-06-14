@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Add missing setup steps to docs
+- Fix `VITE_ALLOWED_REQUEST_METHODS` env undefined in production builds
 
 ## [0.1.0] - 2022-06-13
 
