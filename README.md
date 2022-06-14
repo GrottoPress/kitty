@@ -75,7 +75,63 @@ SECRET_KEY=J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes/chars
 # ...
 ```
 
-Update the file with your own details. Use a **cryptographically secure** value for the secret key. You may run `tr -cd '[:alnum:]' < /dev/random | fold -w32 | head -n1` to generate a key.
+Update the file with your own details. Use a **cryptographically-secure** value for the secret key. You may run `tr -cd '[:alnum:]' < /dev/random | fold -w32 | head -n1` to generate a key.
+
+Add types to `src/app.d.ts`:
+
+```typescript
+
+declare namespace App {
+  // ...
+
+  interface Locals {
+    session: Session
+    // ...
+  }
+
+  interface Session {
+    csrfHeaderKey?: string
+    csrfParamKey?: string
+    csrfToken?: string
+    // ...
+  }
+
+  // ...
+}
+
+interface ImportMetaEnv {
+  VITE_ALLOWED_REQUEST_METHODS: string
+  VITE_SESSION_KEY: string
+}
+```
+
+Set up `svelte.config.js` as follows:
+
+```javascript
+// ->> svelte.config.js
+
+// ...
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  // ...
+  kit: {
+    // ...
+    vite: {
+      // ...
+      optimizeDeps: {
+        exclude: ['@grottopress/kitty'],
+      },
+      ssr: {
+        noExternal: ['@grottopress/kitty'],
+      }
+    }
+  },
+  // ...
+}
+
+export default config
+```
 
 #### Session
 
