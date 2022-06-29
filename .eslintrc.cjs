@@ -10,11 +10,11 @@ module.exports = {
 	},
 	parserOptions: {
 		sourceType: 'module',
-		ecmaVersion: 2020
+		ecmaVersion: 2015
 	},
 	env: {
 		browser: true,
-		es2017: true,
+		es2015: true,
 		node: true
 	}
 };
