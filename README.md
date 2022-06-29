@@ -103,6 +103,10 @@ interface ImportMetaEnv {
   VITE_ALLOWED_REQUEST_METHODS: string
   VITE_SESSION_KEY: string
 }
+
+type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
+
+// ...
 ```
 
 Set up `svelte.config.js` as follows:
