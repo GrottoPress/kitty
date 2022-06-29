@@ -21,5 +21,3 @@ interface ImportMetaEnv {
 }
 
 type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
-
-type Params = Record<string, any>

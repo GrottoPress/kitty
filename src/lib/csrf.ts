@@ -17,7 +17,8 @@ export class Header {
 }
 
 export class Param {
-  constructor(private _params: Params = {}) { }
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  constructor(private _params: Record<string, any> = {}) { }
 
   set(session: App.Session) {
     const params = { ...this._params }
