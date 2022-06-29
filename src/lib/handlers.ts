@@ -16,7 +16,9 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
   const session = cookie.parse(cookies || '')[sessionKey]
 
   let plaintext
-  if (session) plaintext = new Crypto(secretKey!).verifyAndDecrypt(session)
+  if (session && secretKey) {
+    plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
+  }
 
   event.locals.session = plaintext ? JSON.parse(plaintext) : {}
   return await resolve(event)
@@ -25,9 +27,11 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
 export const encryptSession: Handle = async ({ event, resolve }) => {
   const response = await resolve(event)
 
+  if (!secretKey) return response
+
   response.headers.set('Set-Cookie', cookie.serialize(
     sessionKey,
-    new Crypto(secretKey!).encryptAndSign(JSON.stringify(event.locals.session)),
+    new Crypto(secretKey).encryptAndSign(JSON.stringify(event.locals.session)),
     {path: '/', httpOnly: true, sameSite: 'lax', secure: !dev}
   ))
 

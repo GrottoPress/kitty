@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-  export let fetch: Fetch
+  export let fetch: Fetch // eslint-disable-line no-undef
 
   const endpoint = '/handlers/filter-request-methods.json'
   let response: Response | undefined

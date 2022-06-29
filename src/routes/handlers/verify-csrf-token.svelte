@@ -9,7 +9,7 @@
 <script lang="ts">
   import { session } from '$app/stores'
 
-  export let fetch: Fetch
+  export let fetch: Fetch // eslint-disable-line no-undef
 
   const { csrfHeaderKey, csrfParamKey, csrfToken } = $session
   const endpoint = '/handlers/verify-csrf-token.json'
@@ -18,7 +18,8 @@
   const jsonWithToken = async () => {
     const headers = new Headers
     headers.set('Content-Type', 'application/json')
-    headers.set(csrfHeaderKey!, csrfToken!)
+
+    if (csrfHeaderKey && csrfToken) headers.set(csrfHeaderKey, csrfToken)
 
     response = await fetch(endpoint, {
       method: 'POST',

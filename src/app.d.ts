@@ -1,3 +1,4 @@
+/* eslint-disable */
 /// <reference types="@sveltejs/kit" />
 
 declare namespace App {
