@@ -9,7 +9,7 @@
 Install via NPM:
 
 ```bash
-npm install @grottopress/kitty
+npm install cookie dotenv @grottopress/kitty
 ```
 
 ## Using
