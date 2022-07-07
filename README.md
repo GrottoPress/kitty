@@ -77,6 +77,8 @@ SECRET_KEY=J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes/chars
 
 Update the file with your own details. Use a **cryptographically-secure** value for the secret key. You may run `tr -cd '[:alnum:]' < /dev/random | fold -w32 | head -n1` to generate a key.
 
+Remember to set secure permissions for this file: `chmod 0600 .env`.
+
 Add types to `src/app.d.ts`:
 
 ```typescript
