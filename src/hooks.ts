@@ -1,5 +1,4 @@
 import { sequence } from '@sveltejs/kit/hooks'
-import type { GetSession } from '@sveltejs/kit'
 import {
   decryptSession,
   disableCache,
@@ -15,7 +14,3 @@ export const handle = sequence(
   disableCache,
   encryptSession
 )
-
-export const getSession: GetSession = (event) => {
-  return event.locals.session
-}

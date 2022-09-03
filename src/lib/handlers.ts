@@ -1,6 +1,6 @@
 import cookie from 'cookie'
 import type { Handle } from '@sveltejs/kit'
-import { dev } from '$app/env'
+import { dev } from '$app/environment'
 import Crypto from '$lib/crypto'
 import {
   Token as CsrfToken,

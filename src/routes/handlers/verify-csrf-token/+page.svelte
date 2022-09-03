@@ -1,18 +1,10 @@
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit'
-
-  export const load: Load = async ({ fetch }) => {
-    return { props: { fetch } }
-  }
-</script>
-
 <script lang="ts">
-  import { session } from '$app/stores'
+  import { page } from '$app/stores'
 
-  export let fetch: Fetch // eslint-disable-line no-undef
+  export let data: App.PageData
 
-  const { csrfHeaderKey, csrfParamKey, csrfToken } = $session
-  const endpoint = '/handlers/verify-csrf-token.json'
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = $page.data.session
+  const endpoint = '/handlers/verify-csrf-token'
   let response: Response | undefined
 
   const jsonWithToken = async () => {
@@ -21,7 +13,7 @@
 
     if (csrfHeaderKey && csrfToken) headers.set(csrfHeaderKey, csrfToken)
 
-    response = await fetch(endpoint, {
+    response = await data.fetch(endpoint, {
       method: 'POST',
       headers,
       body: JSON.stringify({ city: 'Kumasi' })
@@ -29,7 +21,7 @@
   }
 
   const jsonWithoutToken = async () => {
-    response = await fetch(endpoint, {
+    response = await data.fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ city: 'Kumasi' })

@@ -32,7 +32,6 @@ The `src/hooks.ts` file should look similar to this:
 // ...
 
 import { sequence } from '@sveltejs/kit/hooks'
-import type { GetSession } from '@sveltejs/kit'
 import {
   decryptSession,
   disableCache,
@@ -48,10 +47,6 @@ export const handle = sequence(
   disableCache,
   encryptSession
 )
-
-export const getSession: GetSession = (event) => {
-  return event.locals.session
-}
 
 // ...
 ```
@@ -89,6 +84,11 @@ declare namespace App {
   interface Locals {
     session: Session
     // ...
+  }
+
+  interface PageData {
+    // fetch: Fetch
+    session: Session
   }
 
   interface Session {
@@ -143,7 +143,23 @@ export default config
 
 *Kitty* features encrypted server-side sessions. Any value stored in the `event.locals.session` object is encrypted and persisted as cookies on the client via the `Set-Cookie` response header.
 
-Sessions can be made available client-side via the session store by defining `.getSession()` in `src/hooks.ts` as shown above.
+Sessions can be made available client-side via the session store by defining `.load()` in `src/routes/+layout.server.ts` as follows:
+
+```typescript
+// ->> src/routes/+layout.server.ts
+
+// ...
+
+import type { ServerLoad } from '@sveltejs/kit'
+
+export const load: ServerLoad = async ({ locals }) => {
+  return { session: locals.session }
+}
+
+// ...
+```
+
+This can then be accessed via the `page` store in pages as `$page.data.session`.
 
 #### CSRF
 
@@ -155,21 +171,29 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
 - JSON:
 
-  ```html
-  <script lang="ts" context="module">
-    import type { Load } from '@sveltejs/kit'
+  ```typescript
+  // src/routes/some-path/+page.ts
 
-    export const load: Load = async ({ fetch }) => {
-      return { props: { fetch } }
-    }
-  </script>
+  // ...
+
+  import type { Load } from '@sveltejs/kit'
+
+  export const load: Load = async ({ fetch }) => {
+    return { fetch }
+  }
+
+  // ...
+  ```
+
+  ```html
+  <!-- src/routes/some-path/+page.svelte -->
 
   <script lang="ts">
-    import { session } from '$app/stores'
+    import { page } from '$app/stores'
 
-    export let fetch: Fetch
+    export let data: App.PageData
 
-    const { csrfHeaderKey, csrfToken } = $session
+    const { csrfHeaderKey, csrfToken } = $page.data.session
 
     let city = ''
     let response: Response | undefined
@@ -179,7 +203,7 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
       headers.set('Content-Type', 'application/json')
       headers.set(csrfHeaderKey!, csrfToken!)
 
-      response = await fetch('/some-endpoint', {
+      response = await data.fetch('/some-endpoint', {
         method: 'POST',
         headers,
         body: JSON.stringify({ city })
@@ -203,9 +227,9 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
   ```html
   <script lang="ts">
-    import { session } from '$app/stores'
+    import { page } from '$app/stores'
 
-    const { csrfParamKey, csrfToken } = $session
+    const { csrfParamKey, csrfToken } = $page.data.session
     let city = ''
 
     // ...

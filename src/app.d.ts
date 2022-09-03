@@ -6,6 +6,11 @@ declare namespace App {
     session: Session
   }
 
+  interface PageData {
+    fetch: Fetch
+    session: Session
+  }
+
   interface Platform {}
 
   interface Session {
