@@ -79,6 +79,7 @@ export const disableCache: Handle = async ({ event, resolve }) => {
   const response = await resolve(event)
 
   response.headers.set('Cache-Control', 'no-store')
+  response.headers.set('Pragma', 'no-cache')
   response.headers.set('Expires', 'Sun, 16 Aug 1987 07:00:00 GMT')
 
   return response
