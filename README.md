@@ -306,20 +306,9 @@ The following components are available:
   </button>
   ```
 
-
 ### Helpers
 
 The following helpers are available:
-
-- `Route.redirect(location: string, reload = false)`
-
-  ```typescript
-  import * as Route from '@grottopress/kitty/route'
-
-  Route.redirect('/some/url')
-  ```
-
-  `Route.redirect` provides a single API for redirecting on both client-side and server-side. Setting `reload` to `true` forces a full-page reload, bypassing the client-side router.
 
 - `Route.isJson(context: Request | Response): boolean`
 
