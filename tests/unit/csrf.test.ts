@@ -6,7 +6,7 @@ describe(Header, () => {
     it('sets CSRF header', () => {
       const token = 'abcdef'
       const header = new Header
-      const headers = header.set({csrfToken: token})
+      const headers = header.set(token)
 
       expect(headers.get(Header.key())).toBe(token)
     })

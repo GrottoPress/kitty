@@ -4,9 +4,9 @@ import { Verifier } from '$lib/crypto'
 export class Header {
   constructor(private _headers = new Headers) { }
 
-  set(session: App.Session) {
+  set(token: Token | string) {
     const headers = new Headers(this._headers)
-    headers.set(Header.key(), session.csrfToken || '')
+    headers.set(Header.key(), token.toString())
 
     return headers
   }
