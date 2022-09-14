@@ -5,9 +5,6 @@ import preprocess from 'svelte-preprocess'
 const config = {
 	kit: {
 		adapter: node(),
-    methodOverride: {
-			allowed: ['PATCH', 'DELETE']
-		},
     trailingSlash: 'never',
 	},
   preprocess: [

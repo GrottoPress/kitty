@@ -8,7 +8,7 @@ test.describe('verifyCsrfToken', () => {
     await page.click('#with-token button')
 
     page.on('response', (response) => {
-      expect(response.status).toBe(200)
+      expect(response.status()).toBe(200)
     })
   })
 
@@ -17,7 +17,7 @@ test.describe('verifyCsrfToken', () => {
     await page.click('#without-token button')
 
     page.on('response', (response) => {
-      expect(response.status).toBe(403)
+      expect(response.status()).toBe(403)
     })
   })
 

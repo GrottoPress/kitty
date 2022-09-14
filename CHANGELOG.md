@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Changed
+- Upgrade SvelteKit to v1.0.0-next.481
+- Rename `VITE_ALLOWED_REQUEST_METHODS` env var to `PUBLIC_ALLOWED_REQUEST_METHODS`
+- Rename `VITE_SESSION_KEY` env var to `PUBLIC_SESSION_KEY`
 - Change CSRF `Header.set(App.Session)` to `Header.set(Token | string)`
 - Change CSRF `Param.set(App.Session)` to `Param.set(Token | string)`
 

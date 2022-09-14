@@ -11,10 +11,10 @@
   </Button>
 
   {#if showMenu}
-    <nav bind:this={menu}>
-      <a sveltekit:prefetch href="/csrf-token">Link A</a>
-      <a sveltekit:prefetch href="/handlers/filter-request-methods">Link B</a>
-      <a sveltekit:prefetch href="/handlers/verify-csrf-token">Link C</a>
+    <nav bind:this={menu} data-sveltekit-prefetch>
+      <a href="/csrf-token">Link A</a>
+      <a href="/handlers/filter-request-methods">Link B</a>
+      <a href="/handlers/verify-csrf-token">Link C</a>
     </nav>
   {/if}
 </div>

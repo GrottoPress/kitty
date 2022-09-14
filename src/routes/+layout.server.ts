@@ -1,5 +1,7 @@
 import type { ServerLoad } from '@sveltejs/kit'
 
 export const load: ServerLoad = async ({ locals }) => {
-  return { session: locals.session }
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
+
+  return { csrfHeaderKey, csrfParamKey, csrfToken }
 }

@@ -9,7 +9,7 @@
 Install via NPM:
 
 ```bash
-npm install cookie dotenv @grottopress/kitty
+npm install cookie @grottopress/kitty
 ```
 
 ## Using
@@ -21,13 +21,13 @@ npm install cookie dotenv @grottopress/kitty
 - `decryptSession`: Decrypts session retrieved from the `Cookie` request header
 - `disableCache`: Sets `Cache-Control` and `Expires` headers to disable caching app-wide
 - `encryptSession`: Encrypts session and sends it via the `Set-Cookie` response header
-- `filterRequestMethods`: Forbids requests methods not listed in the `VITE_ALLOWED_REQUEST_METHODS` env var
+- `filterRequestMethods`: Forbids requests methods not listed in the `PUBLIC_ALLOWED_REQUEST_METHODS` env var
 - `verifyCsrfToken`: Generates and verifies CSRF tokens for requests that require them
 
-The `src/hooks.ts` file should look similar to this:
+The `src/hooks.server.ts` file should look similar to this:
 
 ```typescript
-// ->> src/hooks.ts
+// ->> src/hooks.server.ts
 
 // ...
 
@@ -60,8 +60,8 @@ Add the following to the `.env` file:
 
 # Client
 #
-VITE_ALLOWED_REQUEST_METHODS=DELETE,GET,HEAD,PATCH,POST
-VITE_SESSION_KEY=_my-app-session
+PUBLIC_ALLOWED_REQUEST_METHODS=DELETE,GET,HEAD,PATCH,POST
+PUBLIC_SESSION_KEY=_my-app-session
 
 # Sever
 #
@@ -87,23 +87,20 @@ declare namespace App {
   }
 
   interface PageData {
+    csrfHeaderKey: string
+    csrfParamKey: string
+    csrfToken: string
     // fetch: Fetch
-    session: Session
   }
 
   interface Session {
-    csrfHeaderKey?: string
-    csrfParamKey?: string
-    csrfToken?: string
+    csrfHeaderKey: string
+    csrfParamKey: string
+    csrfToken: string
     // ...
   }
 
   // ...
-}
-
-interface ImportMetaEnv {
-  VITE_ALLOWED_REQUEST_METHODS: string
-  VITE_SESSION_KEY: string
 }
 
 type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
@@ -111,27 +108,21 @@ type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 // ...
 ```
 
-Set up `svelte.config.js` as follows:
+Set up `vite.config.js` as follows:
 
 ```javascript
-// ->> svelte.config.js
+// ->> vite.config.js
 
 // ...
 
-/** @type {import('@sveltejs/kit').Config} */
+/** @type {import('vite').UserConfig} */
 const config = {
   // ...
-  kit: {
-    // ...
-    vite: {
-      // ...
-      optimizeDeps: {
-        exclude: ['@grottopress/kitty'],
-      },
-      ssr: {
-        noExternal: ['@grottopress/kitty'],
-      }
-    }
+  optimizeDeps: {
+    exclude: ['@grottopress/kitty'],
+  },
+  ssr: {
+    noExternal: ['@grottopress/kitty'],
   },
   // ...
 }
@@ -153,13 +144,33 @@ Sessions can be made available client-side via the session store by defining `.l
 import type { ServerLoad } from '@sveltejs/kit'
 
 export const load: ServerLoad = async ({ locals }) => {
-  return { session: locals.session }
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
+
+  return { csrfHeaderKey, csrfParamKey, csrfToken }
 }
 
 // ...
 ```
 
-This can then be accessed via the `page` store in pages as `$page.data.session`.
+```typescript
+// ->> src/routes/+layout.ts
+
+// ...
+
+import type { Load } from '@sveltejs/kit'
+
+export const load: Load = async ({ data }) => {
+  const csrfHeaderKey = data?.csrfHeaderKey
+  const csrfParamKey = data?.csrfParamKey
+  const csrfToken = data?.csrfToken
+
+  return { csrfHeaderKey, csrfParamKey, csrfToken }
+}
+
+// ...
+```
+
+This can then be accessed in routes (eg: `data.csrfToken`), or via the `page` store in components (eg: `$page.data.csrfToken`).
 
 #### CSRF
 
@@ -189,11 +200,10 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
   <!-- src/routes/some-path/+page.svelte -->
 
   <script lang="ts">
-    import { page } from '$app/stores'
-
     export let data: App.PageData
 
-    const { csrfHeaderKey, csrfToken } = $page.data.session
+    let { csrfHeaderKey, csrfToken, fetch } = data
+    $: ({ csrfHeaderKey, csrfToken, fetch } = data)
 
     let city = ''
     let response: Response | undefined
@@ -201,9 +211,9 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
     const onSubmit = async () => {
       const headers = new Headers
       headers.set('Content-Type', 'application/json')
-      headers.set(csrfHeaderKey!, csrfToken!)
+      headers.set(csrfHeaderKey, csrfToken)
 
-      response = await data.fetch('/some-endpoint', {
+      response = await fetch('/some-endpoint', {
         method: 'POST',
         headers,
         body: JSON.stringify({ city })
@@ -227,9 +237,11 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
   ```html
   <script lang="ts">
-    import { page } from '$app/stores'
+    export let data: App.PageData
 
-    const { csrfParamKey, csrfToken } = $page.data.session
+    let { csrfParamKey, csrfToken } = data
+    $: ({ csrfParamKey, csrfToken } = data)
+
     let city = ''
 
     // ...
@@ -247,7 +259,6 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
   <!-- ... -->
   ```
-
 
 ### Components
 
@@ -269,10 +280,10 @@ The following components are available:
     </Button>
 
     {#if showMenu}
-      <nav bind:this={menu}>
-        <a sveltekit:prefetch href="/link/a">Link A</a>
-        <a sveltekit:prefetch href="/link/b">Link B</a>
-        <a sveltekit:prefetch href="/link/c">Link C</a>
+      <nav bind:this={menu} data-sveltekit-prefetch>
+        <a href="/link/a">Link A</a>
+        <a href="/link/b">Link B</a>
+        <a href="/link/c">Link C</a>
       </nav>
     {/if}
   </div>

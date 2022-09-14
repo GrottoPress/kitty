@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { page } from '$app/stores'
+  export let data: App.PageData
+
+  let { csrfToken } = data
+  $: ({ csrfToken } = data)
 </script>
 
-<h1>{$page.data.session.csrfToken || ''}</h1>
+<h1>{csrfToken}</h1>

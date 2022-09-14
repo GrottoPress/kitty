@@ -1,4 +1,3 @@
-import 'dotenv/config'
-import { env } from 'process'
+import { env } from '$env/dynamic/private'
 
 export const secretKey = env.SECRET_KEY

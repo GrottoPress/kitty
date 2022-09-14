@@ -1,3 +1,4 @@
+import type { HandleServerError } from '@sveltejs/kit'
 import { sequence } from '@sveltejs/kit/hooks'
 import {
   decryptSession,
@@ -14,3 +15,7 @@ export const handle = sequence(
   disableCache,
   encryptSession
 )
+
+export const handleError: HandleServerError = ({ error }) => {
+  if (error instanceof Error) console.log(error.message)
+}
