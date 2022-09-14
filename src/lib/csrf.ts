@@ -20,9 +20,9 @@ export class Param {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(private _params: Record<string, any> = {}) { }
 
-  set(session: App.Session) {
+  set(token: Token | string) {
     const params = { ...this._params }
-    params[Param.key()] = session.csrfToken
+    params[Param.key()] = token.toString()
 
     return params
   }

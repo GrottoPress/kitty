@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Change CSRF `Header.set(App.Session)` to `Header.set(Token | string)`
+- Change CSRF `Param.set(App.Session)` to `Param.set(Token | string)`
 
 ## [0.2.0] - 2022-09-08
 

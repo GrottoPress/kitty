@@ -18,7 +18,7 @@ describe(Param, () => {
     it('sets CSRF param', () => {
       const token = 'abcdef'
       const param = new Param
-      const params = param.set({csrfToken: token})
+      const params = param.set(token)
 
       expect(params[Param.key()]).toBe(token)
     })
