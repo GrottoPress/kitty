@@ -9,7 +9,7 @@
 Install via NPM:
 
 ```bash
-npm install cookie @grottopress/kitty
+npm install @grottopress/kitty
 ```
 
 ## Using
@@ -41,8 +41,8 @@ import {
 } from '@grottopress/kitty/handlers'
 
 export const handle = sequence(
-  filterRequestMethods,
   decryptSession,
+  filterRequestMethods,
   verifyCsrfToken,
   disableCache,
   encryptSession

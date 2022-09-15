@@ -9,8 +9,8 @@ import {
 } from '$lib/handlers'
 
 export const handle = sequence(
-  filterRequestMethods,
   decryptSession,
+  filterRequestMethods,
   verifyCsrfToken,
   disableCache,
   encryptSession

@@ -1,4 +1,3 @@
-import cookie from 'cookie'
 import type { Handle } from '@sveltejs/kit'
 import { dev } from '$app/environment'
 import Crypto from '$lib/crypto'
@@ -12,30 +11,23 @@ import { secretKey } from '$lib/envs/server'
 import * as Route from '$lib/route'
 
 export const decryptSession: Handle = async ({ event, resolve }) => {
-  const cookies = event.request.headers.get('Cookie')
-  const session = cookie.parse(cookies || '')[sessionKey]
-
+  const session = event.cookies.get(sessionKey)
   let plaintext
-  if (session && secretKey) {
-    plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
-  }
 
+  if (session) plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
   event.locals.session = plaintext ? JSON.parse(plaintext) : {}
+
   return await resolve(event)
 }
 
 export const encryptSession: Handle = async ({ event, resolve }) => {
-  const response = await resolve(event)
-
-  if (!secretKey) return response
-
-  response.headers.set('Set-Cookie', cookie.serialize(
+  event.cookies.set(
     sessionKey,
     new Crypto(secretKey).encryptAndSign(JSON.stringify(event.locals.session)),
     {path: '/', httpOnly: true, sameSite: 'lax', secure: !dev}
-  ))
+  )
 
-  return response
+  return await resolve(event)
 }
 
 export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
