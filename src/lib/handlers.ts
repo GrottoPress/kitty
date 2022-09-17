@@ -1,4 +1,5 @@
 import type { Handle } from '@sveltejs/kit'
+import cookie from 'cookie'
 import { dev } from '$app/environment'
 import Crypto from '$lib/crypto'
 import {
@@ -21,13 +22,15 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
 }
 
 export const encryptSession: Handle = async ({ event, resolve }) => {
-  event.cookies.set(
+  const response = await resolve(event)
+
+  response.headers.set('Set-Cookie', cookie.serialize(
     sessionKey,
     new Crypto(secretKey).encryptAndSign(JSON.stringify(event.locals.session)),
     {path: '/', httpOnly: true, sameSite: 'lax', secure: !dev}
-  )
+  ))
 
-  return await resolve(event)
+  return response
 }
 
 export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
