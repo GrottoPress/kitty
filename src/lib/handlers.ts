@@ -42,22 +42,22 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
 
   if (safeMethods.includes(request.method)) return await resolve(event)
 
-  let requestToken = request.headers.get(CsrfHeader.key())
-  const sessionToken = locals.session.csrfToken
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
+  let requestToken = request.headers.get(csrfHeaderKey)
 
   if (!requestToken) {
     if (Route.isJson(request)) {
       const body = await request.clone().json()
-      requestToken = body[CsrfParam.key()]
+      requestToken = body[csrfParamKey]
     } else {
       const body = await request.clone().formData()
-      requestToken = body.get(CsrfParam.key())?.toString() || ''
+      requestToken = body.get(csrfParamKey)?.toString() || ''
     }
   }
 
   const isValid = requestToken &&
-    sessionToken &&
-    new CsrfToken(requestToken).verify(sessionToken)
+    csrfToken &&
+    new CsrfToken(requestToken).verify(csrfToken)
 
   if (isValid) return await resolve(event)
 
