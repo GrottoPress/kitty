@@ -90,7 +90,7 @@ declare namespace App {
     csrfHeaderKey: string
     csrfParamKey: string
     csrfToken: string
-    // fetch: Fetch
+    // ...
   }
 
   interface Session {
@@ -102,8 +102,6 @@ declare namespace App {
 
   // ...
 }
-
-type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
 // ...
 ```

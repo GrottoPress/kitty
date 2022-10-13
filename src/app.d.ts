@@ -10,10 +10,10 @@ declare namespace App {
     csrfHeaderKey: string
     csrfParamKey: string
     csrfToken: string
-    fetch: Fetch
+    fetch: typeof fetch
   }
 
-  interface PageError {
+  interface Error {
     message: string
   }
 
@@ -25,5 +25,3 @@ declare namespace App {
     csrfToken: string
   }
 }
-
-type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
