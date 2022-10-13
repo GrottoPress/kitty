@@ -8,7 +8,7 @@ import {
 } from '$lib/csrf'
 import {
   allowedRequestMethods,
-  csrfIgnorePaths,
+  csrfSkipRoutes,
   sessionKey
 } from '$lib/envs/client'
 import { secretKey } from '$lib/envs/server'
@@ -45,7 +45,7 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
 
   const { locals, request, routeId } = event
   const safeMethods = ['GET', 'HEAD', 'OPTIONS', 'TRACE']
-  const isIgnored = csrfIgnorePaths.some(path => routeId?.startsWith(path))
+  const isIgnored = csrfSkipRoutes.some(route => routeId?.startsWith(route))
   const isSafe = safeMethods.includes(request.method)
 
   if (isSafe || isIgnored) return await resolve(event)

@@ -185,7 +185,7 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
 # Skip CSRF protection for these routes (comma-separated `event.routeId`s).
 # Adding a route will include all its children.
-PUBLIC_CSRF_IGNORE_PATHS=about/team,blog/[slug]
+PUBLIC_CSRF_SKIP_ROUTES=about/team,blog/[slug]
 
 # ...
 ```

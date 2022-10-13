@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Match paths by route ID instead of URL when ignoring paths in CSRF
+- Rename `PUBLIC_CSRF_IGNORE_PATHS` env var to `PUBLIC_CSRF_SKIP_ROUTES`
 
 ## [0.3.0] - 2022-10-13
 
