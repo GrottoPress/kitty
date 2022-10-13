@@ -6,7 +6,11 @@ import {
   Header as CsrfHeader,
   Param as CsrfParam
 } from '$lib/csrf'
-import { allowedRequestMethods, sessionKey } from '$lib/envs/client'
+import {
+  allowedRequestMethods,
+  csrfIgnorePaths,
+  sessionKey
+} from '$lib/envs/client'
 import { secretKey } from '$lib/envs/server'
 import * as Route from '$lib/route'
 
@@ -39,10 +43,12 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
     event.locals.session.csrfHeaderKey = CsrfHeader.key()
   }
 
-  const { locals, request } = event
+  const { locals, request, url } = event
   const safeMethods = ['GET', 'HEAD', 'OPTIONS', 'TRACE']
+  const isIgnored = csrfIgnorePaths.some(path => url.pathname.startsWith(path))
+  const isSafe = safeMethods.includes(request.method)
 
-  if (safeMethods.includes(request.method)) return await resolve(event)
+  if (isSafe || isIgnored) return await resolve(event)
 
   const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
   let requestToken = request.headers.get(csrfHeaderKey)

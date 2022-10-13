@@ -178,6 +178,18 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
 **Examples**:
 
+```bash
+# ->> .env
+
+# ...
+
+# Skip CSRF protection for these paths (comma-separated).
+# Adding a path will include all its children.
+PUBLIC_CSRF_IGNORE_PATHS=/path/1,/path/2,/path/3
+
+# ...
+```
+
 - JSON:
 
   ```typescript

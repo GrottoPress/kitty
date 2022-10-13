@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add env var to skip CSRF protection for specific paths
+
 ### Fixed
 - Fix `allowedRequestMethods` returning array with single empty string when env var not set
 
