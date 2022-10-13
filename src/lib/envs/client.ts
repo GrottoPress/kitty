@@ -3,8 +3,8 @@ import {
   PUBLIC_SESSION_KEY
 } from '$env/static/public'
 
-export const allowedRequestMethods = PUBLIC_ALLOWED_REQUEST_METHODS
-  .split(',')
+export const allowedRequestMethods = PUBLIC_ALLOWED_REQUEST_METHODS.split(',')
   .map(method => method.trim())
+  .filter(method => method)
 
 export const sessionKey = PUBLIC_SESSION_KEY
