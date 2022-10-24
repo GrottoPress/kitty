@@ -63,7 +63,7 @@ Add the following to the `.env` file:
 PUBLIC_ALLOWED_REQUEST_METHODS=DELETE,GET,HEAD,PATCH,POST
 PUBLIC_SESSION_KEY=_my-app-session
 
-# Sever
+# Server
 #
 SECRET_KEY=J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes/chars
 
