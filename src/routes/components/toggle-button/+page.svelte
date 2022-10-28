@@ -12,9 +12,9 @@
 
   {#if showMenu}
     <nav bind:this={menu} data-sveltekit-prefetch>
-      <a href="/csrf-token">Link A</a>
-      <a href="/handlers/filter-request-methods">Link B</a>
-      <a href="/handlers/verify-csrf-token">Link C</a>
+      <a href="#!">Link A</a>
+      <a href="#!">Link B</a>
+      <a href="#!">Link C</a>
     </nav>
   {/if}
 </div>
