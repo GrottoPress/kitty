@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { afterNavigate } from '$app/navigation'
   import clickOutsideAction from '$lib/actions/click-outside'
 
   export let clickOutside = false
@@ -10,11 +11,14 @@
   }
 
   const close = (event: Event) => {
-    if (!clickOutside) return
-    if (target === event.target) return
+    if (!clickOutside || !target) return
+    const eventTarget = event.target as HTMLElement
 
+    if (target.contains(eventTarget)) return
     open = false
   }
+
+  afterNavigate(() => open = false)
 </script>
 
 <button type="button"

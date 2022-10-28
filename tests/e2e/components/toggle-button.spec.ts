@@ -38,14 +38,4 @@ test.describe('ToggleButton', () => {
     await page.click('nav')
     await expect(page.locator('nav')).toBeVisible()
   })
-
-  test('closes upon clicking a link inside its target', async ({ page }) => {
-    await page.goto(path)
-
-    await page.click('button')
-    await expect(page.locator('nav')).toBeVisible()
-
-    await page.click('nav a:first-child')
-    await expect(page.locator('nav')).not.toBeVisible()
-  })
 })
