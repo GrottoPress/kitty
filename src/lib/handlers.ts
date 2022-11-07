@@ -43,9 +43,9 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
     event.locals.session.csrfHeaderKey = CsrfHeader.key()
   }
 
-  const { locals, request, routeId } = event
+  const { locals, request, route } = event
   const safeMethods = ['GET', 'HEAD', 'OPTIONS', 'TRACE']
-  const isIgnored = csrfSkipRoutes.some(route => routeId?.startsWith(route))
+  const isIgnored = csrfSkipRoutes.some(_route => route.id?.startsWith(_route))
   const isSafe = safeMethods.includes(request.method)
 
   if (isSafe || isIgnored) return await resolve(event)

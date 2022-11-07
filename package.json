@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
-    "@sveltejs/adapter-node": "1.0.0-next.98",
-    "@sveltejs/kit": "1.0.0-next.515",
+    "@sveltejs/adapter-node": "1.0.0-next.100",
+    "@sveltejs/kit": "1.0.0-next.535",
     "@sveltejs/package": "1.0.0-next.5",
     "@types/jest": "^28.1.1",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
