@@ -290,7 +290,7 @@ The following components are available:
     </Button>
 
     {#if showMenu}
-      <nav bind:this={menu} data-sveltekit-prefetch>
+      <nav bind:this={menu}>
         <a href="/link/a">Link A</a>
         <a href="/link/b">Link B</a>
         <a href="/link/c">Link C</a>

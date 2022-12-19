@@ -11,7 +11,7 @@
   </Button>
 
   {#if showMenu}
-    <nav bind:this={menu} data-sveltekit-prefetch>
+    <nav bind:this={menu}>
       <a href="#!">Link A</a>
       <a href="#!">Link B</a>
       <a href="#!">Link C</a>
