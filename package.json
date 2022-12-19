@@ -18,8 +18,8 @@
     "test:unit": "jest tests/unit",
     "test:unit:watch": "npm run test:unit -- --watch",
     "test:e2e": "playwright test tests/e2e",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "devDependencies": {
