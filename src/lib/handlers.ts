@@ -46,7 +46,7 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
   const { locals, request, route } = event
   const safeMethods = ['GET', 'HEAD', 'OPTIONS', 'TRACE']
   const isIgnored = csrfSkipRoutes.some(_route => route.id?.startsWith(_route))
-  const isSafe = safeMethods.includes(request.method)
+  const isSafe = safeMethods.indexOf(request.method) >= 0
 
   if (isSafe || isIgnored) return await resolve(event)
 
@@ -86,7 +86,7 @@ export const disableCache: Handle = async ({ event, resolve }) => {
 }
 
 export const filterRequestMethods: Handle = async ({ event, resolve }) => {
-  if (allowedRequestMethods.includes(event.request.method)) {
+  if (allowedRequestMethods.indexOf(event.request.method) >= 0) {
     return await resolve(event)
   }
 

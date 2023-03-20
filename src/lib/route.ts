@@ -1,3 +1,4 @@
 export const isJson = (context: Request | Response) => {
-  return !!context.headers.get('Content-Type')?.toLowerCase().includes('/json')
+  const header = context.headers.get('Content-Type')
+  return header && header.toLowerCase().indexOf('/json') >= 0
 }
