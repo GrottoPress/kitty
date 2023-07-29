@@ -6,37 +6,59 @@
 
 ## Installing
 
-Install via NPM:
+1. Install via NPM:
 
-```bash
-npm install @grottopress/kitty
-```
+   ```bash
+   npm install @grottopress/kitty
+   ```
+
+1. Set `compilerOptions.moduleResolution` to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
+
+   ```json
+   // ->> tsconfig.json
+
+   {
+     // ...
+     "compilerOptions": {
+       // ...
+       "moduleResolution": "bundler",
+       // ...
+     }
+     // ...
+   }
+   ```
+
+   This prevents the following error:
+
+   ```
+   Cannot find module '@grottopress/kitty' or its corresponding type declarations
+   ```
+
+   See <https://kit.svelte.dev/docs/packaging#typescript>.
+
+1. Set up `vite.config.js` as follows:
+
+   ```javascript
+   // ->> vite.config.js
+
+   // ...
+
+   /** @type {import('vite').UserConfig} */
+   const config = {
+     // ...
+     optimizeDeps: {
+       exclude: ['@grottopress/kitty'],
+     },
+     ssr: {
+       noExternal: ['@grottopress/kitty'],
+     },
+     // ...
+   }
+
+   export default config
+   ```
 
 ## Using
-
-Ensure `compilerOptions.moduleResolution` is set to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
-
-```json
-// ->> tsconfig.json
-
-{
-  // ...
-  "compilerOptions": {
-    // ...
-    "moduleResolution": "bundler",
-    // ...
-  }
-  // ...
-}
-```
-
-This prevents the following error:
-
-```
-Cannot find module '@grottopress/kitty' or its corresponding type declarations
-```
-
-See <https://kit.svelte.dev/docs/packaging#typescript>.
 
 ### Handlers
 
@@ -128,28 +150,6 @@ declare namespace App {
 }
 
 // ...
-```
-
-Set up `vite.config.js` as follows:
-
-```javascript
-// ->> vite.config.js
-
-// ...
-
-/** @type {import('vite').UserConfig} */
-const config = {
-  // ...
-  optimizeDeps: {
-    exclude: ['@grottopress/kitty'],
-  },
-  ssr: {
-    noExternal: ['@grottopress/kitty'],
-  },
-  // ...
-}
-
-export default config
 ```
 
 #### Session
