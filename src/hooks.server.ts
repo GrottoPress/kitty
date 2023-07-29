@@ -6,7 +6,7 @@ import {
   encryptSession,
   filterRequestMethods,
   verifyCsrfToken
-} from '$lib/handlers'
+} from '$lib/server/handlers'
 
 export const handle = sequence(
   decryptSession,

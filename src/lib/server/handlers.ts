@@ -1,11 +1,11 @@
 import type { Handle } from '@sveltejs/kit'
 import { dev } from '$app/environment'
-import Crypto from '$lib/crypto'
+import Crypto from '$lib/server/crypto'
 import {
   Token as CsrfToken,
   Header as CsrfHeader,
   Param as CsrfParam
-} from '$lib/csrf'
+} from '$lib/server/csrf'
 import { allowedRequestMethods, csrfSkipRoutes, sessionKey } from '$lib/env'
 import { secretKey } from '$lib/server/env'
 import * as Route from '$lib/route'

@@ -1,4 +1,4 @@
-import Crypto, { Verifier } from '../../src/lib/crypto'
+import Encrypter, { Verifier } from '../../src/lib/server/crypto'
 import Error from '../../src/lib/error'
 
 describe(Verifier, () => {
@@ -17,13 +17,13 @@ describe(Verifier, () => {
   })
 })
 
-describe(Crypto, () => {
+describe(Encrypter, () => {
   describe('.verifyAndDecrpt', () => {
     it('verifies and decrypts ciphertext', () => {
       const plaintext = 'Hello, World'
       const secret = 'abcdefghijklmnopqrstuvwxyz123456'
 
-      const crypto = new Crypto(secret)
+      const crypto = new Encrypter(secret)
       const ciphertext = crypto.encryptAndSign(plaintext)
 
       expect(crypto.verifyAndDecrypt(ciphertext)).toBe(plaintext)

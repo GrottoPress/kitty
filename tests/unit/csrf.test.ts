@@ -1,5 +1,5 @@
 import 'isomorphic-fetch'
-import { Header, Param, Token } from '../../src/lib/csrf'
+import { Header, Param, Token } from '../../src/lib/server/csrf'
 
 describe(Header, () => {
   describe('.set', () => {

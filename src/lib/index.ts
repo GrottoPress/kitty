@@ -2,13 +2,13 @@ export { default as clickOutside } from './actions/click-outside.js'
 
 export { default as ToggleButton } from './components/ToggleButton.svelte'
 
-export { default as Encrypter, Verifier } from './crypto.js'
+export { default as Encrypter, Verifier } from './server/crypto.js'
 
 export {
   Header as CsrfHeader,
   Param as CsrfParam,
   Token as CsrfToken
-} from './csrf.js'
+} from './server/csrf.js'
 
 export { allowedRequestMethods, csrfSkipRoutes, sessionKey } from './env.js'
 
@@ -22,6 +22,6 @@ export {
   verifyCsrfToken,
   disableCache,
   filterRequestMethods
-} from './handlers.js'
+} from './server/handlers.js'
 
 export { isJson } from './route.js'
