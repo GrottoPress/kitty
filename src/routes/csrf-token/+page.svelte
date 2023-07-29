@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let data: App.PageData
+  export let data: App.PageData // eslint-disable-line no-undef
 
   let { csrfToken } = data
   $: ({ csrfToken } = data)

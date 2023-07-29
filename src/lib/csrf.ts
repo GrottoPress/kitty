@@ -17,7 +17,6 @@ export class Header {
 }
 
 export class Param {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(private _params: Record<string, any> = {}) { }
 
   set(token: Token | string) {
