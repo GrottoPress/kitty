@@ -6,4 +6,4 @@ export { allowedRequestMethods, csrfSkipRoutes, sessionKey } from './env.js'
 
 export { default as Error } from './error.js'
 
-export { isJson } from './route.js'
+export { isJson } from './helpers.js'

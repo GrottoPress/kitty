@@ -8,7 +8,7 @@ import {
 } from '$lib/server/csrf'
 import { allowedRequestMethods, csrfSkipRoutes, sessionKey } from '$lib/env'
 import { secretKey } from '$lib/server/env'
-import * as Route from '$lib/route'
+import { isJson } from '$lib/helpers'
 
 export const decryptSession: Handle = async ({ event, resolve }) => {
   const session = event.cookies.get(sessionKey)
@@ -50,7 +50,7 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
   let requestToken = request.headers.get(csrfHeaderKey)
 
   if (!requestToken) {
-    if (Route.isJson(request)) {
+    if (isJson(request)) {
       const body = await request.clone().json()
       requestToken = body[csrfParamKey]
     } else {
