@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Upgrade to Svelte v4. *Svelte v3 is still supported*
 - Move [server-only modules](https://kit.svelte.dev/docs/server-only-modules) to `src/lib/server/`
+- Load client-side envs dynamically
 
 ## [0.6.1] - 2023-03-20
 
