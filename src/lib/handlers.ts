@@ -6,12 +6,8 @@ import {
   Header as CsrfHeader,
   Param as CsrfParam
 } from '$lib/csrf'
-import {
-  allowedRequestMethods,
-  csrfSkipRoutes,
-  sessionKey
-} from '$lib/envs/client'
-import { secretKey } from '$lib/envs/server'
+import { allowedRequestMethods, csrfSkipRoutes, sessionKey } from '$lib/env'
+import { secretKey } from '$lib/server/env'
 import * as Route from '$lib/route'
 
 export const decryptSession: Handle = async ({ event, resolve }) => {
