@@ -14,6 +14,30 @@ npm install @grottopress/kitty
 
 ## Using
 
+Ensure `compilerOptions.moduleResolution` is set to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
+
+```json
+// ->> tsconfig.json
+
+{
+  // ...
+  "compilerOptions": {
+    // ...
+    "moduleResolution": "bundler",
+    // ...
+  }
+  // ...
+}
+```
+
+This prevents the following error:
+
+```
+Cannot find module '@grottopress/kitty' or its corresponding type declarations
+```
+
+See <https://kit.svelte.dev/docs/packaging#typescript>.
+
 ### Handlers
 
 *Kitty* provides the following handlers:
