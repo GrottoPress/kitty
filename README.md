@@ -38,7 +38,7 @@ import {
   encryptSession,
   filterRequestMethods,
   verifyCsrfToken
-} from '@grottopress/kitty/handlers'
+} from '@grottopress/kitty/server'
 
 export const handle = sequence(
   decryptSession,
@@ -278,16 +278,16 @@ The following components are available:
 
   ```html
   <script lang="ts">
-    import Button from '@grottopress/kitty/components/ToggleButton.svelte'
+    import { ToggleButton } from '@grottopress/kitty'
 
     let menu: HTMLElement | undefined
     let showMenu = false
   </script>
 
   <div>
-    <Button bind:open={showMenu} target={menu} clickOutside>
+    <ToggleButton bind:open={showMenu} target={menu} clickOutside>
       &equiv; Menu
-    </Button>
+    </ToggleButton>
 
     {#if showMenu}
       <nav bind:this={menu}>
@@ -309,7 +309,7 @@ The following components are available:
 
   ```html
   <script lang="ts">
-    import clickOutside from '@grottopress/kitty/actions/click-outside'
+    import { clickOutside } from '@grottopress/kitty'
 
     export let open: boolean
 
@@ -334,9 +334,9 @@ The following helpers are available:
 - `Route.isJson(context: Request | Response): boolean`
 
   ```typescript
-  import * as Route from '@grottopress/kitty/route'
+  import { isJson } from '@grottopress/kitty'
 
-  Route.isJson(requestOrResponseObject)
+  isJson(requestOrResponseObject)
   ```
 
   `Route.isJson` checks if the given request or response is JSON, based on its `Content-Type` header.

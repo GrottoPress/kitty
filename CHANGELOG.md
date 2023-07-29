@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Move more server-only modules to `src/lib/server/`
+- Separate server-side `exports` from client-side ones
+
+### Fixed
+- Fix error: "Cannot import $env/dynamic/private into client-side code"
 
 ## [0.7.0] - 2023-07-29
 
