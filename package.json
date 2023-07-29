@@ -42,6 +42,10 @@
     "typescript": "^5.1.6",
     "vite": "^4.0.1"
   },
+  "peerDependencies": {
+    "@sveltejs/kit": "^1.0.0",
+    "svelte": "^3.44.0 || ^4.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GrottoPress/kitty.git"
@@ -53,5 +57,18 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    }
+  },
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts"
 }
