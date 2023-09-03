@@ -1,4 +1,4 @@
-export { default as Encrypter, Verifier } from './crypto.js'
+export { default as Encrypter, Verifier } from '$lib/server/crypto.js'
 
 export {
   Header as CsrfHeader,
@@ -6,7 +6,7 @@ export {
   Token as CsrfToken
 } from './csrf.js'
 
-export { secretKey } from './env.js'
+export { secretKey } from '$lib/server/env.js'
 
 export {
   decryptSession,
@@ -14,4 +14,4 @@ export {
   verifyCsrfToken,
   disableCache,
   filterRequestMethods
-} from './handlers.js'
+} from '$lib/server/handlers.js'
