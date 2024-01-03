@@ -6,7 +6,12 @@ export {
   Token as CsrfToken
 } from './csrf.js'
 
-export { secretKey } from '$lib/server/env.js'
+export {
+  allowedRequestMethods,
+  csrfSkipRoutes,
+  secretKey,
+  sessionKey
+} from '$lib/server/env.js'
 
 export {
   decryptSession,

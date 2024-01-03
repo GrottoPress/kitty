@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 
+
+### Changed
+- Make all environment variables server-side only
+- Rename `PUBLIC_ALLOWED_REQUEST_METHODS` env var to `ALLOWED_REQUEST_METHODS`
+- Rename `PUBLIC_CSRF_SKIP_ROUTES` env var to `CSRF_SKIP_ROUTES`
+- Rename `PUBLIC_SESSION_KEY` env var to `SESSION_KEY`
+
 ## [0.7.3] - 2023-08-17
 
 ### Fixed

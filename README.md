@@ -67,7 +67,7 @@
 - `decryptSession`: Decrypts session retrieved from the `Cookie` request header
 - `disableCache`: Sets `Cache-Control` and `Expires` headers to disable caching app-wide
 - `encryptSession`: Encrypts session and sends it via the `Set-Cookie` response header
-- `filterRequestMethods`: Forbids requests methods not listed in the `PUBLIC_ALLOWED_REQUEST_METHODS` env var
+- `filterRequestMethods`: Forbids requests methods not listed in the `ALLOWED_REQUEST_METHODS` env var
 - `verifyCsrfToken`: Generates and verifies CSRF tokens for requests that require them
 
 The `src/hooks.server.ts` file should look similar to this:
@@ -106,12 +106,12 @@ Add the following to the `.env` file:
 
 # Client
 #
-PUBLIC_ALLOWED_REQUEST_METHODS=DELETE,GET,HEAD,PATCH,POST
-PUBLIC_SESSION_KEY=_my-app-session
 
 # Server
 #
+ALLOWED_REQUEST_METHODS=DELETE,GET,HEAD,PATCH,POST
 SECRET_KEY=J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes/chars
+SESSION_KEY=_my-app-session
 
 # ...
 ```
@@ -209,7 +209,7 @@ CSRF mitigations are enforced for all requests *except* those with the `GET`, `H
 
 # Skip CSRF protection for these routes (comma-separated `event.route.id`s).
 # Adding a route will include all its children.
-PUBLIC_CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
+CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
 # ...
 ```

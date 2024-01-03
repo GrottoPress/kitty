@@ -6,8 +6,12 @@ import {
   Header as CsrfHeader,
   Param as CsrfParam
 } from '$lib/server/csrf'
-import { allowedRequestMethods, csrfSkipRoutes, sessionKey } from '$lib/env'
-import { secretKey } from '$lib/server/env'
+import {
+  allowedRequestMethods,
+  csrfSkipRoutes,
+  secretKey,
+  sessionKey
+} from '$lib/server/env'
 import { isJson } from '$lib/helpers'
 
 export const decryptSession: Handle = async ({ event, resolve }) => {
