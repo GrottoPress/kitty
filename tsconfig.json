@@ -5,6 +5,7 @@
     "target": "es2015",
     "lib": ["DOM"],
     "moduleResolution": "bundler",
+    "verbatimModuleSyntax": false,
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
