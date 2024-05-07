@@ -355,7 +355,7 @@ The following components are available:
 
 The following helpers are available:
 
-- `Route.isJson(context: Request | Response): boolean`
+- `.isJson(context: Request | Response): boolean`
 
   ```typescript
   import { isJson } from '@grottopress/kitty'
@@ -363,7 +363,7 @@ The following helpers are available:
   isJson(requestOrResponseObject)
   ```
 
-  `Route.isJson` checks if the given request or response is JSON, based on its `Content-Type` header.
+  `.isJson()` checks if the given request or response is JSON, based on its `Content-Type` header.
 
 ## Developing
 
