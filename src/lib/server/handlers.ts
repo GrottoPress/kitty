@@ -18,8 +18,12 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
   const session = event.cookies.get(sessionKey)
   let plaintext
 
-  if (session) plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
-  event.locals.session = plaintext ? JSON.parse(plaintext) : {}
+  try {
+    if (session) plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
+    event.locals.session = plaintext ? JSON.parse(plaintext) : {}
+  } catch {
+    event.locals.session = {}
+  }
 
   return await resolve(event)
 }
@@ -51,15 +55,15 @@ export const verifyCsrfToken: Handle = async ({ event, resolve }) => {
   if (isSafe || isIgnored) return await resolve(event)
 
   const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
-  let requestToken = request.headers.get(csrfHeaderKey)
+  let requestToken = csrfHeaderKey ? request.headers.get(csrfHeaderKey) : null
 
   if (!requestToken) {
     if (isJson(request)) {
       const body = await request.clone().json()
-      requestToken = body[csrfParamKey]
+      requestToken = csrfParamKey ? body[csrfParamKey] : null
     } else {
       const body = await request.clone().formData()
-      requestToken = body.get(csrfParamKey)?.toString() || ''
+      requestToken = csrfParamKey ? body.get(csrfParamKey)?.toString() || '' : null
     }
   }
 

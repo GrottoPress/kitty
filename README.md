@@ -133,16 +133,16 @@ declare namespace App {
   }
 
   interface PageData {
-    csrfHeaderKey: string
-    csrfParamKey: string
-    csrfToken: string
+    csrfHeaderKey?: string
+    csrfParamKey?: string
+    csrfToken?: string
     // ...
   }
 
   interface Session {
-    csrfHeaderKey: string
-    csrfParamKey: string
-    csrfToken: string
+    csrfHeaderKey?: string
+    csrfParamKey?: string
+    csrfToken?: string
     // ...
   }
 
@@ -243,6 +243,8 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
     let response: Response | undefined
 
     const onSubmit = async () => {
+      if (!csrfHeaderKey || !csrfToken) return
+
       const headers = new Headers
       headers.set('Content-Type', 'application/json')
       headers.set(csrfHeaderKey, csrfToken)

@@ -6,10 +6,9 @@ declare namespace App {
   }
 
   interface PageData {
-    csrfHeaderKey: string
-    csrfParamKey: string
-    csrfToken: string
-    fetch: typeof fetch
+    csrfHeaderKey?: string
+    csrfParamKey?: string
+    csrfToken?: string
   }
 
   interface Error {
@@ -19,8 +18,8 @@ declare namespace App {
   interface Platform {}
 
   interface Session {
-    csrfHeaderKey: string
-    csrfParamKey: string
-    csrfToken: string
+    csrfHeaderKey?: string
+    csrfParamKey?: string
+    csrfToken?: string
   }
 }
