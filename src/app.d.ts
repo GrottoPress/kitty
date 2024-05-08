@@ -9,6 +9,7 @@ declare namespace App {
     csrfHeaderKey?: string
     csrfParamKey?: string
     csrfToken?: string
+    fetch: typeof fetch
   }
 
   interface Error {

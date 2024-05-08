@@ -9,6 +9,8 @@
   let response: Response | undefined
 
   const jsonWithToken = async () => {
+    if (!csrfHeaderKey || !csrfToken) return
+
     const headers = new Headers
     headers.set('Content-Type', 'application/json')
     headers.set(csrfHeaderKey, csrfToken)
