@@ -1,7 +1,7 @@
 {
   "name": "@grottopress/kitty",
   "type": "module",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "Kitty is a collection of utilities for SvelteKit",
   "license": "MIT",
   "author": {
