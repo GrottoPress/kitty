@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from '../../../lib/components/ToggleButton.svelte'
+  import Button from '$lib/components/ToggleButton.svelte'
 
   let menu: HTMLElement | undefined
   let showMenu = false
