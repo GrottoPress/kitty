@@ -300,6 +300,30 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
 The following components are available:
 
+- `Connection`
+
+  ```html
+  <script lang="ts">
+    import { Connection } from '@grottopress/kitty'
+  </script>
+
+  <Connection slowAfterMs={6000}>
+    <aside slot="offline" class="connection offline">
+      <p>You are offline!</p>
+    </aside>
+
+    <aside slot="slow" class="connection slow">
+      <p>Check your internet connection</p>
+    </aside>
+
+    <aside slot="online" class="connection online">
+      <p>Hurray!!!</p>
+    </aside>
+  </Connection>
+  ```
+
+  The `slowAfterMs` prop sets the connection status to `slow` if a page is not loaded after the given period in milliseconds.
+
 - `ToggleButton`
 
   ```html
