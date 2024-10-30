@@ -15,16 +15,10 @@
 1. Set `compilerOptions.moduleResolution` to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
 
    ```json
-   // ->> tsconfig.json
-
    {
-     // ...
      "compilerOptions": {
-       // ...
        "moduleResolution": "bundler",
-       // ...
      }
-     // ...
    }
    ```
 
