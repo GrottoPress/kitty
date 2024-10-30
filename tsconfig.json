@@ -5,13 +5,13 @@
     "target": "es2015",
     "lib": ["DOM"],
     "moduleResolution": "bundler",
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": true,
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
   }
 }

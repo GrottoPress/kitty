@@ -3,15 +3,21 @@
 </script>
 
 <Connection slowAfterMs={1000}>
-  <aside slot="offline" class="connection offline">
-    <p>Offline</p>
-  </aside>
+  {#snippet offline()}
+    <aside class="connection offline">
+      <p>Offline</p>
+    </aside>
+  {/snippet}
 
-  <aside slot="slow" class="connection slow">
-    <p>Slow</p>
-  </aside>
+  {#snippet slow()}
+    <aside class="connection slow">
+      <p>Slow</p>
+    </aside>
+  {/snippet}
 
-  <aside slot="online" class="connection online">
-    <p>Online</p>
-  </aside>
+  {#snippet online()}
+    <aside class="connection online">
+      <p>Online</p>
+    </aside>
+  {/snippet}
 </Connection>

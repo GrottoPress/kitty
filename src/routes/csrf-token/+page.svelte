@@ -1,8 +1,9 @@
 <script lang="ts">
-  export let data: App.PageData // eslint-disable-line no-undef
+  interface Props {
+    data: App.PageData // eslint-disable-line no-undef
+  }
 
-  let { csrfToken } = data
-  $: ({ csrfToken } = data)
+  let { data }: Props = $props()
 </script>
 
-<h1>{csrfToken}</h1>
+<h1>{data.csrfToken}</h1>

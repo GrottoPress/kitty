@@ -1,15 +1,18 @@
 <script lang="ts">
-  export let data: App.PageData // eslint-disable-line no-undef
+  interface Props {
+    data: App.PageData // eslint-disable-line no-undef
+  }
 
-  let { fetch } = data
-  $: ({ fetch } = data)
+  let { data }: Props = $props()
 
   const endpoint = '/handlers/filter-request-methods.json'
 
-  let response: Response | undefined
+  let response: Response | undefined = $state()
 
-  const sendDeleteRequest = async () => {
-    response = await fetch(endpoint, {
+  const sendDeleteRequest = async (event: Event) => {
+    event.preventDefault()
+
+    response = await data.fetch(endpoint, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data: null })
@@ -19,6 +22,6 @@
 
 <h1>{response?.status || 0}</h1>
 
-<form on:submit|preventDefault={sendDeleteRequest}>
+<form onsubmit={sendDeleteRequest}>
   <button type="submit">Send</button>
 </form>

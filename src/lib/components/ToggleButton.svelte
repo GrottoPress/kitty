@@ -1,10 +1,21 @@
 <script lang="ts">
+  import { type Snippet } from 'svelte'
   import { afterNavigate } from '$app/navigation'
   import clickOutsideAction from '$lib/actions/click-outside'
 
-  export let clickOutside = false
-  export let open: boolean
-  export let target: HTMLElement | undefined = undefined
+  interface Props {
+    clickOutside?: boolean
+    open: boolean
+    target?: HTMLElement | undefined
+    children?: Snippet
+  }
+
+  let {
+    clickOutside = false,
+    open = $bindable(),
+    target = undefined,
+    children
+  }: Props = $props()
 
   const toggle = () => {
     open = !open
@@ -23,8 +34,8 @@
 
 <button type="button"
   use:clickOutsideAction={close}
-  on:click={toggle}
+  onclick={toggle}
   class="toggle-button">
 
-  <slot />
+  {@render children?.()}
 </button>

@@ -1,11 +1,24 @@
 <script lang="ts">
+  import { type Snippet } from 'svelte'
   import { browser } from '$app/environment'
   import { afterNavigate, beforeNavigate } from '$app/navigation'
 
-  export let slowAfterMs = 6000
+  interface Props {
+    slowAfterMs: number
+    offline?: Snippet
+    slow?: Snippet
+    online?: Snippet
+  }
+
+  let {
+    slowAfterMs = 6000,
+    offline,
+    slow,
+    online
+  }: Props = $props()
 
   let status: 'offline' | 'online' | 'slow' =
-    browser && !navigator.onLine ? 'offline' : 'online'
+    $state(browser && !navigator.onLine ? 'offline' : 'online')
 
   let timeout: NodeJS.Timeout | undefined // eslint-disable-line no-undef
 
@@ -25,12 +38,12 @@
   })
 </script>
 
-<svelte:window on:offline={setOffline} on:online={setOnline} />
+<svelte:window onoffline={setOffline} ononline={setOnline} />
 
 {#if status === 'offline'}
-  <slot name="offline" />
+  {@render offline?.()}
 {:else if status === 'slow'}
-  <slot name="slow" />
+  {@render slow?.()}
 {:else}
-  <slot name="online" />
+  {@render online?.()}
 {/if}

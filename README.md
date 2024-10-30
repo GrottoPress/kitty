@@ -234,22 +234,25 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
   <!-- src/routes/some-path/+page.svelte -->
 
   <script lang="ts">
-    export let data: App.PageData
+    interface Props {
+      data: App.PageData
+    }
 
-    let { csrfHeaderKey, csrfToken, fetch } = data
-    $: ({ csrfHeaderKey, csrfToken, fetch } = data)
+    let { data }: Props = $props()
 
-    let city = ''
-    let response: Response | undefined
+    let city = $state('')
+    let response: Response | undefined = $state()
 
-    const onSubmit = async () => {
-      if (!csrfHeaderKey || !csrfToken) return
+    const onSubmit = async (event: Event) => {
+      event.preventDefault()
+
+      if (!data.csrfHeaderKey || !data.csrfToken) return
 
       const headers = new Headers
       headers.set('Content-Type', 'application/json')
-      headers.set(csrfHeaderKey, csrfToken)
+      headers.set(data.csrfHeaderKey, data.csrfToken)
 
-      response = await fetch('/some-endpoint', {
+      response = await data.fetch('/some-endpoint', {
         method: 'POST',
         headers,
         body: JSON.stringify({ city })
@@ -261,7 +264,7 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
   <!-- ... -->
 
-  <form on:submit|preventDefault={onSubmit}>
+  <form onsubmit={onSubmit}>
     <input type="text" name="city" bind:value={city} />
     <button type="submit">Submit</button>
   </form>
@@ -273,12 +276,13 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
   ```html
   <script lang="ts">
-    export let data: App.PageData
+    interface Props {
+      data: App.PageData
+    }
 
-    let { csrfParamKey, csrfToken } = data
-    $: ({ csrfParamKey, csrfToken } = data)
+    let { data }: Props = $props()
 
-    let city = ''
+    let city = $state('')
 
     // ...
   </script>
@@ -288,7 +292,7 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
   <!-- ... -->
 
   <form method="POST" action="/some-endpoint">
-    <input type="hidden" name={csrfParamKey} value={csrfToken} />
+    <input type="hidden" name={data.csrfParamKey} value={data.csrfToken} />
     <input type="text" name="city" bind:value={city} />
     <button type="submit">Submit</button>
   </form>
@@ -308,17 +312,23 @@ The following components are available:
   </script>
 
   <Connection slowAfterMs={6000}>
-    <aside slot="offline" class="connection offline">
-      <p>You are offline!</p>
-    </aside>
+    {#snippet offline()}
+      <aside class="connection offline">
+        <p>You are offline</p>
+      </aside>
+    {/snippet}
 
-    <aside slot="slow" class="connection slow">
-      <p>Check your internet connection</p>
-    </aside>
+    {#snippet slow()}
+      <aside class="connection slow">
+        <p>Check your internet connection</p>
+      </aside>
+    {/snippet}
 
-    <aside slot="online" class="connection online">
-      <p>Hurray!!!</p>
-    </aside>
+    {#snippet online()}
+      <aside class="connection online">
+        <p>Hurray!!!</p>
+      </aside>
+    {/snippet}
   </Connection>
   ```
 
@@ -330,8 +340,8 @@ The following components are available:
   <script lang="ts">
     import { ToggleButton } from '@grottopress/kitty'
 
-    let menu: HTMLElement | undefined
-    let showMenu = false
+    let menu: HTMLElement | undefined = $state()
+    let showMenu = $state(false)
   </script>
 
   <div>
@@ -361,7 +371,11 @@ The following components are available:
   <script lang="ts">
     import { clickOutside } from '@grottopress/kitty'
 
-    export let open: boolean
+    interface Props {
+      open: boolean
+    }
+
+    let { open }: Props = $props()
 
     const toggle = () => {
       open = !open
@@ -372,7 +386,7 @@ The following components are available:
     }
   </script>
 
-  <button type="button" use:clickOutside={close} on:click={toggle}>
+  <button type="button" use:clickOutside={close} onclick={toggle}>
     <slot />
   </button>
   ```
