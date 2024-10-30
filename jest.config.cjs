@@ -1,4 +1,4 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -8,5 +8,10 @@ module.exports = {
 			'<rootDir>/.svelte-kit/dev/runtime/app$1',
 			'<rootDir>/.svelte-kit/build/runtime/app$1'
 		]
-	}
+	},
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest', { isolatedModules: true, useESM: true },
+    ],
+  },
 }
