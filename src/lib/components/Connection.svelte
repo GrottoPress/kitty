@@ -4,7 +4,7 @@
   import { afterNavigate, beforeNavigate } from '$app/navigation'
 
   interface Props {
-    slowAfterMs: number
+    slowAfterMs?: number
     offline?: Snippet
     slow?: Snippet
     online?: Snippet
