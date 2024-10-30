@@ -1,4 +1,4 @@
-export { default as Encrypter, Verifier } from '$lib/server/crypto.js'
+export { Encrypter, Verifier } from '$lib/server/crypto.js'
 
 export {
   Header as CsrfHeader,

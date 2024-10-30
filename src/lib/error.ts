@@ -1,1 +1,1 @@
-export default class extends Error { }
+export class Error extends globalThis.Error { }

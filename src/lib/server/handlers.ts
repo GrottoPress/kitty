@@ -1,6 +1,6 @@
 import type { Handle } from '@sveltejs/kit'
 import { dev } from '$app/environment'
-import Crypto from '$lib/server/crypto'
+import { Encrypter } from '$lib/server/crypto'
 import {
   Token as CsrfToken,
   Header as CsrfHeader,
@@ -19,7 +19,7 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
   let plaintext
 
   try {
-    if (session) plaintext = new Crypto(secretKey).verifyAndDecrypt(session)
+    if (session) plaintext = new Encrypter(secretKey).verifyAndDecrypt(session)
     event.locals.session = plaintext ? JSON.parse(plaintext) : {}
   } catch {
     event.locals.session = {}
@@ -30,10 +30,11 @@ export const decryptSession: Handle = async ({ event, resolve }) => {
 
 export const encryptSession: Handle = async ({ event, resolve }) => {
   const response = await resolve(event)
+  const json = JSON.stringify(event.locals.session)
 
   response.headers.set('Set-Cookie', event.cookies.serialize(
     sessionKey,
-    new Crypto(secretKey).encryptAndSign(JSON.stringify(event.locals.session)),
+    new Encrypter(secretKey).encryptAndSign(json),
     {path: '/', httpOnly: true, sameSite: 'lax', secure: !dev}
   ))
 

@@ -1,7 +1,9 @@
 <script lang="ts">
   import { type Snippet } from 'svelte'
   import { afterNavigate } from '$app/navigation'
-  import clickOutsideAction from '$lib/actions/click-outside'
+  import {
+    clickOutside as clickOutsideAction
+  } from '$lib/actions/click-outside'
 
   interface Props {
     clickOutside?: boolean

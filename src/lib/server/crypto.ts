@@ -7,7 +7,7 @@ import {
   randomBytes,
   timingSafeEqual
 } from  'crypto'
-import Error from '$lib/error'
+import { Error } from '$lib/error'
 
 export class Verifier {
   constructor(
@@ -33,7 +33,7 @@ export class Verifier {
   }
 }
 
-export default class {
+export class Encrypter {
   private readonly _algorithm = 'aes-256-cbc'
   private readonly _cipherEncoding = 'hex'
   private readonly _ivSize = 16 // 'aes' block size

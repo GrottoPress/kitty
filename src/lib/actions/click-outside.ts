@@ -1,4 +1,7 @@
-export default (node: HTMLElement, handler: (event: Event) => void) => {
+export const clickOutside = (
+  node: HTMLElement,
+  handler: (event: Event) => void
+) => {
   const onClick = (event: Event) => {
     /* eslint-disable @typescript-eslint/no-unused-expressions */
     !node.contains(event.target as HTMLElement) &&
