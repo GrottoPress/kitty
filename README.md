@@ -9,7 +9,7 @@
 1. Install via NPM:
 
    ```bash
-   npm install @grottopress/kitty
+   npm i -D @grottopress/kitty
    ```
 
 1. Set `compilerOptions.moduleResolution` to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
