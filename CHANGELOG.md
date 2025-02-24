@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.12.1] - 2024-10-30
 
 ### Fixed
-- Make `slowAfterMs` prop is optional in `Connection` component
+- Make `slowAfterMs` prop optional in `Connection` component
 
 ## [0.12.0] - 2024-10-30
 
