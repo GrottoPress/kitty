@@ -339,7 +339,7 @@ The following components are available:
   </script>
 
   <div>
-    <ToggleButton bind:open={showMenu} target={menu} clickOutside>
+    <ToggleButton bind:open={showMenu} clickOutside={menu}>
       &equiv; Menu
     </ToggleButton>
 
@@ -353,7 +353,7 @@ The following components are available:
   </div>
   ```
 
-  The `clickOutside` prop, if `true`, enables closing a menu by clicking anywhere outside the button and its target.
+  The `clickOutside` prop accepts the target HTML element, and enables closing that element by clicking anywhere outside it.
 
 ### Actions
 

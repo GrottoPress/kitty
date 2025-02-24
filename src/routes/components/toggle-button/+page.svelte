@@ -6,7 +6,7 @@
 </script>
 
 <div>
-  <Button bind:open={showMenu} target={menu} clickOutside>
+  <Button bind:open={showMenu} clickOutside={menu}>
     &equiv; Menu
   </Button>
 
