@@ -146,6 +146,22 @@ declare namespace App {
 // ...
 ```
 
+Disable SvelteKit's built-in CSRF protection in `svelte.config.js`:
+
+```javascript
+// ...
+
+const config = {
+  kit: {
+    csrf: { checkOrigin: false }
+    // ...
+  },
+  // ...
+}
+
+// ...
+```
+
 #### Session
 
 *Kitty* features encrypted server-side sessions. Any value stored in the `event.locals.session` object is encrypted and persisted as cookies on the client via the `Set-Cookie` response header.
