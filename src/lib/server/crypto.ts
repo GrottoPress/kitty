@@ -35,13 +35,12 @@ export class Verifier {
 
 export class Encrypter {
   private readonly _algorithm = 'aes-256-cbc'
-  private readonly _cipherEncoding = 'hex'
+  private readonly _cipherEncoding = 'base64url'
+  private readonly _ivEncoding = 'hex'
   private readonly _ivSize = 16 // 'aes' block size
   private readonly _plainEncoding = 'utf-8'
-  private readonly _signSeparator = '--'
+  private readonly _signSeparator = ':'
   private readonly _verifier
-
-  private readonly _cipherIvSize = this._ivSize * 2 // Because 'hex'
 
   constructor(private _secret: string) {
     this._verifier = new Verifier(this._secret, this._cipherEncoding)
@@ -52,25 +51,30 @@ export class Encrypter {
     const secretBuffer = Buffer.from(this._secret)
     const cipher = createCipheriv(this._algorithm, secretBuffer, ivBuffer)
 
-    let ciphertext =
-      cipher.update(plaintext, this._plainEncoding, this._cipherEncoding)
+    let ciphertext = cipher.update(
+      plaintext,
+      this._plainEncoding,
+      this._cipherEncoding
+    )
 
-    const iv = ivBuffer.toString(this._cipherEncoding)
+    const iv = ivBuffer.toString(this._ivEncoding)
     ciphertext += cipher.final(this._cipherEncoding)
 
     return `${iv}${ciphertext}`
   }
 
   decrypt(ciphertext: string) {
-    const iv = ciphertext.slice(0, this._cipherIvSize)
-    const rawText = ciphertext.slice(this._cipherIvSize)
-    const ivBuffer = Buffer.from(iv, this._cipherEncoding)
+    const ivSize = this._ivSize * 2 // Because 'hex'
+
+    const iv = ciphertext.slice(0, ivSize)
+    const text = ciphertext.slice(ivSize)
+    const ivBuffer = Buffer.from(iv, this._ivEncoding)
     const secretBuffer = Buffer.from(this._secret)
 
     const decipher = createDecipheriv(this._algorithm, secretBuffer, ivBuffer)
 
     const plaintext = decipher.update(
-      rawText,
+      text,
       this._cipherEncoding,
       this._plainEncoding
     )
@@ -86,12 +90,12 @@ export class Encrypter {
   }
 
   verifyAndDecrypt(ciphertext: string) {
-    const [ rawText, signature ] = ciphertext.split(this._signSeparator, 2)
+    const [ text, signature ] = ciphertext.split(this._signSeparator, 2)
 
-    if (!this._verifier.verify(rawText, signature)) {
+    if (!this._verifier.verify(text, signature)) {
       throw new Error('Message verification failed')
     }
 
-    return this.decrypt(rawText)
+    return this.decrypt(text)
   }
 }

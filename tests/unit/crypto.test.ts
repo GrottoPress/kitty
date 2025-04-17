@@ -28,7 +28,7 @@ describe(Encrypter, () => {
       const ciphertext = crypto.encryptAndSign(plaintext)
 
       expect(crypto.verifyAndDecrypt(ciphertext)).toBe(plaintext)
-      expect(() => crypto.verifyAndDecrypt('wrong--ciphertext')).toThrow(Error)
+      expect(() => crypto.verifyAndDecrypt('wrong:ciphertext')).toThrow(Error)
     })
   })
 })
