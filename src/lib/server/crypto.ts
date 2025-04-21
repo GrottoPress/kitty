@@ -39,7 +39,7 @@ export class Encrypter {
   private readonly _ivEncoding = 'hex'
   private readonly _ivSize = 16 // 'aes' block size
   private readonly _plainEncoding = 'utf-8'
-  private readonly _signSeparator = ':'
+  private readonly _signSeparator = '.'
   private readonly _verifier
 
   constructor(private _secret: string) {
