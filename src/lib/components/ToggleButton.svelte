@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
-  import { afterNavigate } from '$app/navigation'
+  import { beforeNavigate } from '$app/navigation'
   import {
     clickOutside as clickOutsideAction
   } from '$lib/actions/click-outside'
@@ -27,7 +27,7 @@
     open = false
   }
 
-  afterNavigate(() => open = false)
+  beforeNavigate(() => open = false)
 </script>
 
 <button type="button"
