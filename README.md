@@ -371,6 +371,8 @@ The following components are available:
 
   The `clickOutside` prop accepts the target HTML element, and enables closing that element by clicking anywhere outside it.
 
+  You may set a `keepOpen` prop that would keep the menu open after navigating to another page, if the menu was already open. By default, the menu is closed upon navigating to another page.
+
 ### Actions
 
 *Kitty* comes with the following actions for `use` in components:

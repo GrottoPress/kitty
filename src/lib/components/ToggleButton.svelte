@@ -7,12 +7,14 @@
 
   interface Props {
     clickOutside?: HTMLElement
+    keepOpen?: boolean
     open: boolean
     children?: Snippet
   }
 
   let {
     clickOutside = undefined,
+    keepOpen = false,
     open = $bindable(),
     children
   }: Props = $props()
@@ -27,7 +29,9 @@
     open = false
   }
 
-  beforeNavigate(() => open = false)
+  beforeNavigate(() => {
+    if (!keepOpen) open = false
+  })
 </script>
 
 <button type="button"
