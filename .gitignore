@@ -12,3 +12,4 @@ node_modules
 .output
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+/forge.yaml
