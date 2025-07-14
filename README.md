@@ -173,9 +173,9 @@ Sessions can be made available client-side via the session store by defining `.l
 
 // ...
 
-import type { ServerLoad } from '@sveltejs/kit'
+import type { LayoutServerLoad } from './$types'
 
-export const load: ServerLoad = async ({ locals }) => {
+export const load: LayoutServerLoad = async ({ locals }) => {
   const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
 
   return { csrfHeaderKey, csrfParamKey, csrfToken }
@@ -189,12 +189,10 @@ export const load: ServerLoad = async ({ locals }) => {
 
 // ...
 
-import type { Load } from '@sveltejs/kit'
+import type { LayoutLoad } from './$types'
 
-export const load: Load = async ({ data }) => {
-  const csrfHeaderKey = data?.csrfHeaderKey
-  const csrfParamKey = data?.csrfParamKey
-  const csrfToken = data?.csrfToken
+export const load: LayoutLoad = async ({ data }) => {
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = data
 
   return { csrfHeaderKey, csrfParamKey, csrfToken }
 }
@@ -231,9 +229,9 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
   // ...
 
-  import type { Load } from '@sveltejs/kit'
+  import type { PageLoad } from './$types'
 
-  export const load: Load = async ({ fetch }) => {
+  export const load: PageLoad = async ({ fetch }) => {
     return { fetch }
   }
 
@@ -244,8 +242,10 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
   <!-- src/routes/some-path/+page.svelte -->
 
   <script lang="ts">
+    import type { PageData } from './$types'
+
     interface Props {
-      data: App.PageData
+      data: PageData
     }
 
     let { data }: Props = $props()
@@ -286,8 +286,10 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
   ```html
   <script lang="ts">
+    import type { PageData } from './$types'
+
     interface Props {
-      data: App.PageData
+      data: PageData
     }
 
     let { data }: Props = $props()

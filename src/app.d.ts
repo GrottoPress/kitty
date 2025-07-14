@@ -5,19 +5,9 @@ declare namespace App {
     session: Session
   }
 
-  interface PageData {
-    csrfHeaderKey?: string
-    csrfParamKey?: string
-    csrfToken?: string
-    fetch: typeof fetch
-  }
-
   interface Error {
     message: string
   }
-
-  /* eslint-disable @typescript-eslint/no-empty-object-type */
-  interface Platform {}
 
   interface Session {
     csrfHeaderKey?: string

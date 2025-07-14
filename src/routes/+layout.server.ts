@@ -1,6 +1,6 @@
-import type { ServerLoad } from '@sveltejs/kit'
+import type { LayoutServerLoad } from './$types'
 
-export const load: ServerLoad = async ({ locals }) => {
+export const load: LayoutServerLoad = async ({ locals }) => {
   const { csrfHeaderKey, csrfParamKey, csrfToken } = locals.session
 
   return { csrfHeaderKey, csrfParamKey, csrfToken }

@@ -1,9 +1,7 @@
-import type { Load } from '@sveltejs/kit'
+import type { LayoutLoad } from './$types'
 
-export const load: Load = async ({ data }) => {
-  const csrfHeaderKey = data?.csrfHeaderKey
-  const csrfParamKey = data?.csrfParamKey
-  const csrfToken = data?.csrfToken
+export const load: LayoutLoad = async ({ data }) => {
+  const { csrfHeaderKey, csrfParamKey, csrfToken } = data
 
   return { csrfHeaderKey, csrfParamKey, csrfToken }
 }

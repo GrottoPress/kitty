@@ -1,6 +1,8 @@
 <script lang="ts">
+  import type { PageData } from './$types'
+
   interface Props {
-    data: App.PageData // eslint-disable-line no-undef
+    data: PageData
   }
 
   let { data }: Props = $props()
