@@ -30,28 +30,6 @@
 
    See <https://kit.svelte.dev/docs/packaging#typescript>.
 
-1. Set up `vite.config.js` as follows:
-
-   ```javascript
-   // ->> vite.config.js
-
-   // ...
-
-   /** @type {import('vite').UserConfig} */
-   const config = {
-     // ...
-     optimizeDeps: {
-       exclude: ['@grottopress/kitty'],
-     },
-     ssr: {
-       noExternal: ['@grottopress/kitty'],
-     },
-     // ...
-   }
-
-   export default config
-   ```
-
 ## Using
 
 ### Handlers
