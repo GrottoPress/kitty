@@ -92,7 +92,7 @@ export class Encrypter {
   verifyAndDecrypt(ciphertext: string) {
     const [ text, signature ] = ciphertext.split(this._signSeparator, 2)
 
-    if (!this._verifier.verify(text, signature)) {
+    if (!signature || !this._verifier.verify(text, signature)) {
       throw new Error('Message verification failed')
     }
 

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Fixed
+- Fix `TypeError` in crypto when ciphertext has wrong format
 - Use type restrictions from `./$types` module
 
 ## [0.15.0] - 2025-07-03
