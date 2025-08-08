@@ -24,12 +24,14 @@ test.describe('verifyCsrfToken', () => {
   test('ignores valid CSRF token for JSON data', async ({ page }) => {
     await page.goto(path)
     await page.click('#json-with-token button')
-    expect(await page.textContent('h1')).toBe('200')
+
+    await expect(page.locator('h1')).toHaveText('200')
   })
 
   test('ignores invalid CSRF token for JSON data', async ({ page }) => {
     await page.goto(path)
     await page.click('#json-without-token button')
-    expect(await page.textContent('h1')).toBe('200')
+
+    await expect(page.locator('h1')).toHaveText('200')
   })
 })

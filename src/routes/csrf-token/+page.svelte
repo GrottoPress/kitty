@@ -8,4 +8,4 @@
   let { data }: Props = $props()
 </script>
 
-<h1>{data.csrfToken}</h1>
+<h1>{data.csrfToken || ''}</h1>
