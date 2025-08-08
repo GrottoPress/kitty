@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix `TypeError` in crypto when ciphertext has wrong format
 - Use type restrictions from `./$types` module
 
+### Changed
+- Switch tests to use `@testing-library/svelte` package
+
 ## [0.15.0] - 2025-07-03
 
 ### Added

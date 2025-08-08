@@ -5,13 +5,13 @@
   let showMenu = $state(false)
 </script>
 
-<div>
+<div data-testid="wrap">
   <Button bind:open={showMenu} clickOutside={menu}>
     &equiv; Menu
   </Button>
 
   {#if showMenu}
-    <nav bind:this={menu}>
+    <nav bind:this={menu} data-testid="menu">
       <a href="#!">Link A</a>
       <a href="#!">Link B</a>
       <a href="#!">Link C</a>
