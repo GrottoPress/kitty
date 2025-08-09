@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nodejs: [20.x]
+        nodejs: [20.x, latest]
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
