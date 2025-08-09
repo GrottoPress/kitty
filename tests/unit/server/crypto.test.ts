@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { Encrypter, Verifier } from '../../src/lib/server/crypto'
-import { Error } from '../../src/lib/error'
+import { Encrypter, Verifier } from '../../../src/lib/server/crypto'
+import { Error } from '../../../src/lib/error'
 
 describe(Verifier, () => {
   describe('.verify', () => {
