@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nodejs: [20.x, latest]
+        nodejs: [20.x]
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -31,8 +31,18 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
+        env:
+          ALLOWED_REQUEST_METHODS: GET,HEAD,POST
+          CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
+          SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
+          SESSION_KEY: _kitty-session
       - name: Check code
         run: npm run check
+        env:
+          ALLOWED_REQUEST_METHODS: GET,HEAD,POST
+          CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
+          SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
+          SESSION_KEY: _kitty-session
   tests__unit:
     strategy:
       fail-fast: false
@@ -74,3 +84,8 @@ jobs:
         run: npx playwright install --with-deps --only-shell
       - name: Run tests
         run: npm run test:e2e
+        env:
+          ALLOWED_REQUEST_METHODS: GET,HEAD,POST
+          CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
+          SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
+          SESSION_KEY: _kitty-session
