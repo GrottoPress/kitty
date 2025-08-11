@@ -1,4 +1,3 @@
-import 'isomorphic-fetch'
 import { describe, expect, it } from 'vitest'
 import { Header, Param, Token } from '../../../src/lib/server/csrf'
 
