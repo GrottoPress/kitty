@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.nodejs }}
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Lint code
         run: pnpm run lint
       - name: Check code
@@ -58,7 +58,7 @@ jobs:
           node-version: ${{ matrix.nodejs }}
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Run tests
         run: pnpm run test:unit
   tests__e2e:
@@ -80,7 +80,7 @@ jobs:
           node-version: ${{ matrix.nodejs }}
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Install browsers
         run: npx playwright install --with-deps --only-shell
       - name: Run tests
