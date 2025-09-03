@@ -6,10 +6,10 @@
 
 ## Installing
 
-1. Install via NPM:
+1. Install via PNPM:
 
    ```bash
-   npm i -D @grottopress/kitty
+   pnpm install -D @grottopress/kitty
    ```
 
 1. Set `compilerOptions.moduleResolution` to `bundler`, `node16`, or `nodenext` in `tsconfig.json`:
@@ -399,7 +399,7 @@ The following helpers are available:
 
 ## Developing
 
-After cloning this repository, copy `sample.env` to `.env`, and run `npm install`. You may start the development server with `npm run dev`, or run tests with `npm run test`.
+After cloning this repository, copy `sample.env` to `.env`, and run `pnpm install`. You may start the development server with `pnpm run dev`, or run tests with `pnpm run test`.
 
 ## Contributing
 

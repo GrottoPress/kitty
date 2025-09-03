@@ -22,17 +22,19 @@ jobs:
     steps:
       - name: Download source
         uses: actions/checkout@v4
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
       - name: Install Node ${{ matrix.nodejs }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodejs }}
-          cache: npm
+          cache: pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
       - name: Lint code
-        run: npm run lint
+        run: pnpm run lint
       - name: Check code
-        run: npm run check
+        run: pnpm run check
         env: &env
           ALLOWED_REQUEST_METHODS: GET,HEAD,POST
           CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
@@ -48,15 +50,17 @@ jobs:
     steps:
       - name: Download source
         uses: actions/checkout@v4
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
       - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodejs }}
-          cache: npm
+          cache: pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
       - name: Run tests
-        run: npm run test:unit
+        run: pnpm run test:unit
   tests__e2e:
     strategy:
       fail-fast: false
@@ -68,16 +72,18 @@ jobs:
     steps:
       - name: Download source
         uses: actions/checkout@v4
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
       - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodejs }}
-          cache: npm
+          cache: pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
       - name: Install browsers
         run: npx playwright install --with-deps --only-shell
       - name: Run tests
-        run: npm run test:e2e
+        run: pnpm run test:e2e
         env:
           <<: *env

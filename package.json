@@ -14,15 +14,16 @@
     "build": "svelte-kit sync && vite build",
     "package": "svelte-kit sync && svelte-package",
     "preview": "vite preview --port 3000",
-    "test": "npm run test:unit && npm run test:e2e",
+    "test": "pnpm run test:unit && pnpm run test:e2e",
     "test:unit": "vitest --watch=false tests/unit",
-    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:unit:watch": "pnpm run test:unit -- --watch",
     "test:e2e": "playwright test",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^9.34.0",
     "@playwright/test": "^1.22.2",
     "@sveltejs/adapter-node": "^5.2.9",
     "@sveltejs/kit": "^2.5.27",
@@ -34,6 +35,7 @@
     "@types/node": "^24.0.10",
     "eslint": "^9.0.0",
     "eslint-plugin-svelte": "^3.5.1",
+    "globals": "^16.3.0",
     "jsdom": "^26.1.0",
     "svelte": "^5.1.4",
     "svelte-check": "^4.0.5",
@@ -74,5 +76,6 @@
       "types": "./dist/server/index.d.ts",
       "svelte": "./dist/server/index.js"
     }
-  }
+  },
+  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
 }
