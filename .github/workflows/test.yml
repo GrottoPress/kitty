@@ -33,7 +33,7 @@ jobs:
         run: npm run lint
       - name: Check code
         run: npm run check
-        env:
+        env: &env
           ALLOWED_REQUEST_METHODS: GET,HEAD,POST
           CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
           SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
@@ -80,7 +80,4 @@ jobs:
       - name: Run tests
         run: npm run test:e2e
         env:
-          ALLOWED_REQUEST_METHODS: GET,HEAD,POST
-          CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
-          SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
-          SESSION_KEY: _kitty-session
+          <<: *env
