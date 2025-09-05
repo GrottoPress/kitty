@@ -34,8 +34,8 @@
   })
 
   afterNavigate(() => {
-    if (status === 'slow') setOnline()
     clearTimeout(timeout)
+    if (status === 'slow') setOnline()
   })
 </script>
 
