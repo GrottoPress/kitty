@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix potential race condition with `.clearTimeout()` in `Connection` component
 
 ### Changed
+- Replace all snippet props with `children` snippet in `Connection` component
 - Switch to PNPM package manager
 
 ### Removed

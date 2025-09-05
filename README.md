@@ -302,22 +302,14 @@ The following components are available:
   </script>
 
   <Connection slowAfterMs={6000}>
-    {#snippet offline()}
-      <aside class="connection offline">
-        <p>You are offline</p>
-      </aside>
-    {/snippet}
-
-    {#snippet slow()}
-      <aside class="connection slow">
-        <p>Check your internet connection</p>
-      </aside>
-    {/snippet}
-
-    {#snippet online()}
-      <aside class="connection online">
-        <p>Hurray!!!</p>
-      </aside>
+    {#snippet children({ isOffline, isOnline, isSlow })}
+      {#if isOffline}
+        You are offline
+      {:else if isSlow}
+        Check your internet connection
+      {:else if isOnline}
+        Hurray!!!
+      {/if}
     {/snippet}
   </Connection>
   ```

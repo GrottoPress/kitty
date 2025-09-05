@@ -1,3 +1,7 @@
+<script lang="ts" module>
+  export type ConnectionStatus = 'offline' | 'online' | 'slow'
+</script>
+
 <script lang="ts">
   import { type Snippet } from 'svelte'
   import { browser } from '$app/environment'
@@ -5,21 +9,23 @@
 
   interface Props {
     slowAfterMs?: number
-    offline?: Snippet
-    slow?: Snippet
-    online?: Snippet
+    children?: Snippet<[{
+      isOffline: boolean,
+      isOnline: boolean,
+      isSlow: boolean,
+      status: ConnectionStatus
+    }]>
   }
 
-  let {
-    slowAfterMs = 6000,
-    offline,
-    slow,
-    online
-  }: Props = $props()
+  let { slowAfterMs = 6000, children }: Props = $props()
 
-  let status: 'offline' | 'online' | 'slow' = $state(
+  let status = $state<ConnectionStatus>(
     browser && !navigator.onLine ? 'offline' : 'online'
   )
+
+  const isOffline = $derived(status === 'offline')
+  const isOnline = $derived(status === 'online')
+  const isSlow = $derived(status === 'slow')
 
   let timeout: NodeJS.Timeout | undefined // eslint-disable-line no-undef
 
@@ -29,22 +35,24 @@
 
   beforeNavigate(() => {
     timeout = setTimeout(() => {
-      if (status === 'online') setSlow()
+      if (isOnline) setSlow()
     }, slowAfterMs)
   })
 
   afterNavigate(() => {
     clearTimeout(timeout)
-    if (status === 'slow') setOnline()
+    if (isSlow) setOnline()
   })
 </script>
 
 <svelte:window onoffline={setOffline} ononline={setOnline} />
 
-{#if status === 'offline'}
-  {@render offline?.()}
-{:else if status === 'slow'}
-  {@render slow?.()}
-{:else}
-  {@render online?.()}
+{#if children}
+  <div class="connection"
+    class:connection--offline={isOffline}
+    class:connection--online={isOnline}
+    class:connection--slow={isSlow}>
+
+    {@render children({ isOffline, isOnline, isSlow, status })}
+  </div>
 {/if}
