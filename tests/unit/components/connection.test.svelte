@@ -1,9 +1,12 @@
 <script lang="ts">
-  import Connection from '$lib/components/Connection.svelte'
+  import Connection, { connection } from '$lib/components/Connection.svelte'
+
+  const state = $derived(connection)
 </script>
 
 <Connection slowAfterMs={1000}>
   {#snippet children({ status })}
-    {status}
+    <span class="state">{state.status}</span>
+    <span class="status">{status}</span>
   {/snippet}
 </Connection>

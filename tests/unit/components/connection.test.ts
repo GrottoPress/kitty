@@ -7,14 +7,30 @@ describe(Connection, () => {
     const { container } = render(Connection)
 
     await fireEvent.online(window)
-    expect(container.querySelector('.connection')).toHaveTextContent('online')
+
+    expect(container.querySelector('.connection'))
+      .toHaveClass('connection--online')
+
+    expect(container.querySelector('.connection .state'))
+      .toHaveTextContent('online')
+
+    expect(container.querySelector('.connection .status'))
+      .toHaveTextContent('online')
   })
 
   it('shows offline status', async () => {
     const { container } = render(Connection)
 
     await fireEvent.offline(window)
-    expect(container.querySelector('.connection')).toHaveTextContent('offline')
+
+    expect(container.querySelector('.connection'))
+      .toHaveClass('connection--offline')
+
+    expect(container.querySelector('.connection .state'))
+      .toHaveTextContent('offline')
+
+    expect(container.querySelector('.connection .status'))
+      .toHaveTextContent('offline')
   })
 
   it.skip('shows slow status', () => {
