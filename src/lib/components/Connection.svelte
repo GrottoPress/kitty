@@ -17,8 +17,9 @@
     online
   }: Props = $props()
 
-  let status: 'offline' | 'online' | 'slow' =
-    $state(browser && !navigator.onLine ? 'offline' : 'online')
+  let status: 'offline' | 'online' | 'slow' = $state(
+    browser && !navigator.onLine ? 'offline' : 'online'
+  )
 
   let timeout: NodeJS.Timeout | undefined // eslint-disable-line no-undef
 
