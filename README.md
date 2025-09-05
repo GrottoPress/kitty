@@ -298,17 +298,23 @@ The following components are available:
 
   ```svelte
   <script lang="ts">
-    import { Connection } from '@grottopress/kitty'
+    import { Connection /* , connection */ } from '@grottopress/kitty'
   </script>
 
   <Connection slowAfterMs={6000}>
-    {#snippet children({ isOffline, isOnline, isSlow })}
-      {#if isOffline}
-        You are offline
-      {:else if isSlow}
-        Check your internet connection
-      {:else if isOnline}
-        Hurray!!!
+    {#snippet children({ /* isOffline, isOnline, isSlow */, status })}
+      {#if status === 'offline'}
+        <aside class="connection offline">
+          <p>You are offline</p>
+        </aside>
+      {:else if status === 'slow'}
+        <aside class="connection slow">
+          <p>Check your internet connection</p>
+        </aside>
+      {:else if status === 'online'}
+        <aside class="connection online">
+          <p>Hurray!!!</p>
+        </aside>
       {/if}
     {/snippet}
   </Connection>

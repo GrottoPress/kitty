@@ -66,12 +66,4 @@
 
 <svelte:window onoffline={setOffline} ononline={setOnline} />
 
-{#if children}
-  <div class="connection"
-    class:connection--offline={isOffline}
-    class:connection--online={isOnline}
-    class:connection--slow={isSlow}>
-
-    {@render children({ isOffline, isOnline, isSlow, status })}
-  </div>
-{/if}
+{@render children?.({ isOffline, isOnline, isSlow, status })}
