@@ -216,7 +216,7 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
   // ...
   ```
 
-  ```html
+  ```svelte
   <!-- src/routes/some-path/+page.svelte -->
 
   <script lang="ts">
@@ -262,7 +262,7 @@ CSRF_SKIP_ROUTES=/about/team,/blog/[slug]
 
 - Form data:
 
-  ```html
+  ```svelte
   <script lang="ts">
     import type { PageData } from './$types'
 
@@ -296,7 +296,7 @@ The following components are available:
 
 - `Connection`
 
-  ```html
+  ```svelte
   <script lang="ts">
     import { Connection } from '@grottopress/kitty'
   </script>
@@ -326,7 +326,7 @@ The following components are available:
 
 - `ToggleButton`
 
-  ```html
+  ```svelte
   <script lang="ts">
     import { ToggleButton } from '@grottopress/kitty'
 
@@ -359,7 +359,7 @@ The following components are available:
 
 - `clickOutside`
 
-  ```html
+  ```svelte
   <script lang="ts">
     import { clickOutside } from '@grottopress/kitty'
 
