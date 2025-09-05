@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fix potential race condition with `.clearTimeout()` in `Connection` component
 
+### Changed
+- Switch to PNPM package manager
+
 ### Removed
 - Remove unused `isomorphic-fetch` package
 
