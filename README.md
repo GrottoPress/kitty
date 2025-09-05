@@ -351,6 +351,31 @@ The following components are available:
 
   You may set a `keepOpen` prop that would keep the menu open after navigating to another page, if the menu was already open. By default, the menu is closed upon navigating to another page.
 
+### States
+
+- `connection`
+
+  `connection` is a global state that contains current connection details:
+
+  ```typescript
+  {
+    isOffline: boolean,
+    isOnline: boolean,
+    isSlow: boolean,
+    status: ConnectionStatus
+  }
+  ```
+
+  You may use this state to access connection information from another component:
+
+  ```svelte
+  <script lang="ts">
+    import { connection } from '@grottopress/kitty'
+  </script>
+
+  {connection.status}
+  ```
+
 ### Actions
 
 *Kitty* comes with the following actions for `use` in components:
