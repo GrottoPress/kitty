@@ -104,6 +104,6 @@ jobs:
       - name: Build package
         run: pnpm run package
       - name: Publish package
-        run: pnpm publish
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
