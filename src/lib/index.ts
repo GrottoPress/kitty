@@ -5,8 +5,8 @@ export {
   type ConnectionState,
   type ConnectionStatus,
   connection
-} from '$lib/components/Connection.svelte'
-export { default as ToggleButton } from '$lib/components/ToggleButton.svelte'
+} from '$lib/components/connection.svelte'
+export { default as ToggleButton } from '$lib/components/toggle-button.svelte'
 
 export { Error } from '$lib/error.js'
 

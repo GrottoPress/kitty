@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Connection, { connection } from '$lib/components/Connection.svelte'
+  import Connection, { connection } from '$lib/components/connection.svelte'
 
   const state = $derived(connection)
 </script>
