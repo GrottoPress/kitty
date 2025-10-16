@@ -43,7 +43,9 @@
   const setOnline = () => status = 'online'
   const setSlow = () => status = 'slow'
 
-  beforeNavigate(() => {
+  beforeNavigate(({ from, to }) => {
+    if (from?.url.href === to?.url.href) return
+
     timeout = setTimeout(() => {
       if (isOnline) setSlow()
     }, slowAfterMs)
