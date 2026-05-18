@@ -37,7 +37,7 @@
   const isOnline = $derived(status === 'online')
   const isSlow = $derived(status === 'slow')
 
-  let timeout: NodeJS.Timeout | undefined // eslint-disable-line no-undef
+  let timeout: NodeJS.Timeout | undefined
 
   const setOffline = () => status = 'offline'
   const setOnline = () => status = 'online'
