@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Bump minimum supported NodeJS version to 22.x
 
+### Removed
+- Remove `tslib` package
+
 ## [0.17.2] - 2025-09-05
 
 ### Fixed
