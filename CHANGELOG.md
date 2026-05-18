@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Support typescript v6
+
 ### Changed
 - Bump minimum supported NodeJS version to 22.x
 
