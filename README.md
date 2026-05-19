@@ -131,7 +131,7 @@ Disable SvelteKit's built-in CSRF protection in `svelte.config.js`:
 
 const config = {
   kit: {
-    csrf: { checkOrigin: false }
+    csrf: { trustedOrigins: ['*'] }
     // ...
   },
   // ...
