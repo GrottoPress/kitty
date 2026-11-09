@@ -61,6 +61,11 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Run tests
         run: pnpm run test:unit
+        env:
+          ALLOWED_REQUEST_METHODS: GET,HEAD,POST
+          CSRF_SKIP_ROUTES: /handlers/verify-csrf-token/ignore,/handlers/verify-csrf-token.json/ignore
+          SECRET_KEY: J9oyuTDuGSQhwE3lOutjUgXe4yfpWQtI # 32 bytes
+          SESSION_KEY: _kitty-session
   tests__e2e:
     strategy:
       fail-fast: false

@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { browser } from '$app/environment'
+  import { browser } from '$app/env'
 
   export type ConnectionStatus = 'offline' | 'online' | 'slow'
 

@@ -3,7 +3,7 @@
   import { beforeNavigate } from '$app/navigation'
   import {
     clickOutside as clickOutsideAction
-  } from '$lib/actions/click-outside'
+  } from '#lib/actions/click-outside.js'
 
   interface Props {
     clickOutside?: HTMLElement

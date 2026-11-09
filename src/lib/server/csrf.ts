@@ -1,5 +1,5 @@
 import { randomBytes } from  'crypto'
-import { Verifier } from '$lib/server/crypto'
+import { Verifier } from '#lib/server/crypto.js'
 
 export class Header {
   constructor(private _headers = new Headers) { }

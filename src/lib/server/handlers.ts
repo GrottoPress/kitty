@@ -1,18 +1,18 @@
-import type { Handle } from '@sveltejs/kit'
-import { dev } from '$app/environment'
-import { Encrypter } from '$lib/server/crypto'
+import type { Handle } from '@sveltejs/kit/hooks'
+import { dev } from '$app/env'
+import { Encrypter } from '#lib/server/crypto.js'
 import {
   Token as CsrfToken,
   Header as CsrfHeader,
   Param as CsrfParam
-} from '$lib/server/csrf'
+} from '#lib/server/csrf.js'
 import {
   allowedRequestMethods,
   csrfSkipRoutes,
   secretKey,
   sessionKey
-} from '$lib/server/env'
-import { isJson } from '$lib/helpers'
+} from '#lib/server/env.js'
+import { isJson } from '#lib/helpers.js'
 
 export const decryptSession: Handle = async ({ event, resolve }) => {
   const session = event.cookies.get(sessionKey)

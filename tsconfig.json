@@ -1,18 +1,14 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
+  "extends": "$app/tsconfig",
   "compilerOptions": {
     "module": "es2020",
     "target": "es2020",
     "lib": ["DOM"],
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
     "noImplicitAny": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "rewriteRelativeImportExtensions": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "sourceMap": true,
     "strict": true,
-  }
+    "types": ["$app/types", "node"]
+  },
+  "include": ["src", "tests", "vite.config.ts"]
 }

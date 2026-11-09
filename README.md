@@ -4,6 +4,8 @@
 
 *Kitty* features encrypted server-side sessions, and provides mitigations against CSRF attacks for forms submitted to the server.
 
+*Kitty* requires SvelteKit v3 and Svelte 5.
+
 ## Installing
 
 1. Install via PNPM:
@@ -28,7 +30,7 @@
    Cannot find module '@grottopress/kitty' or its corresponding type declarations
    ```
 
-   See <https://kit.svelte.dev/docs/packaging#typescript>.
+   See <https://svelte.dev/docs/kit/packaging>.
 
 ## Using
 
@@ -92,6 +94,21 @@ Update the file with your own details. Use a **cryptographically-secure** value 
 
 Remember to set secure permissions for this file: `chmod 0600 .env`.
 
+Declare these variables in `src/env.ts`, so that they can be imported from `$app/env/private`:
+
+```typescript
+// ->> src/env.ts
+
+import { defineEnvVars } from '@sveltejs/kit/env'
+
+export const variables = defineEnvVars({
+  ALLOWED_REQUEST_METHODS: {},
+  CSRF_SKIP_ROUTES: {},
+  SECRET_KEY: {},
+  SESSION_KEY: {},
+})
+```
+
 Add types to `src/app.d.ts`:
 
 ```typescript
@@ -124,27 +141,34 @@ declare namespace App {
 // ...
 ```
 
-Disable SvelteKit's built-in CSRF protection in `svelte.config.js`:
+SvelteKit 3 always enables its built-in CSRF protection. To rely solely on *Kitty*'s `verifyCsrfToken` handler, trust all origins in `vite.config.ts`:
 
 ```javascript
+// ->> vite.config.ts
+
 // ...
 
-const config = {
-  kit: {
-    csrf: { trustedOrigins: ['*'] }
-    // ...
-  },
-  // ...
-}
+import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    sveltekit({
+      csrf: { trustedOrigins: ['*'] }
+    })
+  ]
+})
 
 // ...
 ```
+
+Only do this if *Kitty* is enforcing CSRF protection for your app.
 
 #### Session
 
 *Kitty* features encrypted server-side sessions. Any value stored in the `event.locals.session` object is encrypted and persisted as cookies on the client via the `Set-Cookie` response header.
 
-Sessions can be made available client-side via the session store by defining `.load()` in `src/routes/+layout.server.ts` as follows:
+Sessions can be made available client-side via `page.data` by defining `.load()` in `src/routes/+layout.server.ts` as follows:
 
 ```typescript
 // ->> src/routes/+layout.server.ts
@@ -178,7 +202,7 @@ export const load: LayoutLoad = async ({ data }) => {
 // ...
 ```
 
-This can then be accessed in routes (eg: `data.csrfToken`), or via the `page` store in components (eg: `$page.data.csrfToken`).
+This can then be accessed in routes (eg: `data.csrfToken`), or via `page` in components (eg: `page.data.csrfToken`, after importing `page` from `$app/state`).
 
 #### CSRF
 

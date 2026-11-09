@@ -7,7 +7,7 @@ import {
   randomBytes,
   timingSafeEqual
 } from  'crypto'
-import { Error } from '$lib/error'
+import { Error } from '#lib/error.js'
 
 export class Verifier {
   constructor(

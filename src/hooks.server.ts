@@ -1,4 +1,4 @@
-import type { HandleServerError } from '@sveltejs/kit'
+import type { HandleServerError } from '@sveltejs/kit/hooks'
 import { sequence } from '@sveltejs/kit/hooks'
 import {
   decryptSession,
@@ -6,7 +6,7 @@ import {
   encryptSession,
   filterRequestMethods,
   verifyCsrfToken
-} from '$lib/server/handlers'
+} from '#lib/server/handlers.js'
 
 export const handle = sequence(
   decryptSession,
