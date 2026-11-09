@@ -7,8 +7,7 @@
     "noImplicitAny": true,
     "rewriteRelativeImportExtensions": true,
     "sourceMap": true,
-    "strict": true,
-    "types": ["$app/types", "node"]
+    "strict": true
   },
   "include": ["src", "tests", "vite.config.ts"]
 }
